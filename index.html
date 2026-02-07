@@ -95,6 +95,11 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
+    /* CORREÇÃO 1: BOTÃO FICAR ROXO QUANDO PRESSIONADO */
+    .botao-iniciar:active {
+      background: #570657 !important;
+    }
+
     .question {
       font-size: 1.2em;
       margin: 20px 0;
@@ -123,6 +128,11 @@
     .options button:hover {
       background: #570657;
       transform: scale(1.05);
+    }
+
+    /* CORREÇÃO 1: BOTÕES FICAREM ROXOS QUANDO PRESSIONADOS */
+    .options button:active {
+      background: #570657 !important;
     }
 
     .feedback {
@@ -167,10 +177,10 @@
       display: none;
     }
     
-    /* ===== MEDIA QUERIES PARA MOBILE (APENAS OS PROBLEMAS ORIGINAIS) ===== */
+    /* ===== MEDIA QUERIES PARA MOBILE (APENAS CORREÇÕES ORIGINAIS) ===== */
     @media only screen and (max-width: 768px) {
       body {
-        padding-bottom: 120px; /* 1. Espaço para o rodapé */
+        padding-bottom: 120px;
       }
       
       footer {
@@ -181,62 +191,39 @@
       }
       
       .quiz-container {
-        margin-top: 80px;
+        margin-top: 20px; /* RESTAURADO: mesmo valor do desktop */
         margin-left: 0;
-        padding: 0 15px; /* 4. Previne texto cortado */
+        padding: 0 15px;
       }
       
       .question {
-        padding: 0 5px; /* 4. Previne texto cortado */
+        padding: 0 5px;
         word-wrap: break-word;
       }
       
       .feedback {
         height: 40px;
-        margin-bottom: 20px; /* 3. Espaço para ver o feedback */
+        margin-bottom: 20px;
       }
       
-      /* 5. Remove problema do hover persistente no mobile */
+      /* Remove problema do hover persistente no mobile */
       @media (hover: none) and (pointer: coarse) {
         .options button:hover {
           background: #b22222 !important;
           transform: none !important;
         }
-        
-        .options button:active {
-          background: #570657 !important;
-          transform: scale(0.98) !important;
-        }
       }
     }
     
-    /* ===== AGORA OS 4 PONTOS ESPECÍFICOS QUE VOCÊ PEDIU AGORA ===== */
-    @media only screen and (max-width: 768px) {
-      /* 1. Distância imagem → mensagem = mensagem → botão */
-      #telaInicial img {
-        margin-bottom: 15px !important;
+    /* Ajustes para telas muito pequenas */
+    @media only screen and (max-width: 375px) {
+      .menu-fixo a {
+        font-size: 24px;
       }
       
-      .mensagem-inicial {
-        margin-top: 0 !important;
-        margin-bottom: 15px !important;
-      }
-      
-      /* 2. Barra de progresso mais próxima da imagem no quiz */
-      #quiz img {
-        margin-bottom: 2px !important;
-      }
-      
-      .progress-bar {
-        margin: 2px auto 10px auto !important;
-      }
-      
-      /* 3. Garantir que tudo fique centralizado */
-      /* (Removi qualquer regra que pudesse afetar alinhamento) */
-      
-      /* 4. Botão ficar roxo ao clicar no mobile */
-      .options button:active {
-        background: #570657 !important;
+      footer {
+        font-size: 1.1em;
+        padding: 10px 6px;
       }
     }
   </style>
@@ -346,11 +333,6 @@
       telaInicial.classList.add('oculto');
       quiz.classList.remove('oculto');
       
-      // Scroll para o topo no mobile
-      if (window.innerWidth <= 768) {
-        window.scrollTo(0, 0);
-      }
-      
       questions = prepareShuffledQuestions();
       current = 0;
       score = 0;
@@ -377,8 +359,6 @@
           btn.innerText = opt;
           
           btn.onclick = function() {
-            // Força ficar roxo ao clicar
-            this.style.backgroundColor = '#570657';
             checkAnswer(i);
           };
           
@@ -405,7 +385,6 @@
         btn.disabled = true;
         btn.style.cursor = 'not-allowed';
         btn.style.opacity = '0.7';
-        btn.style.backgroundColor = '#b22222';
       });
       
       if (i === questions[current].answer) {
