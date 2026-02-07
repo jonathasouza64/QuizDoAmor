@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz do Amor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -191,18 +191,19 @@
       }
       
       /* TELA INICIAL - APENAS AJUSTE DA DISTÂNCIA ENTRE IMAGEM E MENSAGEM */
+      /* O botão tem margin-bottom: 25px no desktop, vamos usar a mesma proporção */
       #telaInicial img {
         max-width: 250px !important;
-        margin-top: 5px !important; /* Mantém afastado do menu */
-        margin-bottom: 20px !important; /* DISTÂNCIA IGUAL AO BOTÃO ABAIXO */
+        margin-bottom: 25px !important; /* MESMA DISTÂNCIA QUE O BOTÃO TEM */
       }
       
       .mensagem-inicial {
         margin-top: 0 !important; /* Remove margem negativa */
-        margin-bottom: 20px !important; /* IGUAL À DISTÂNCIA DA IMAGEM ACIMA */
+        margin-bottom: 25px !important; /* MESMA DISTÂNCIA QUE A IMAGEM TEM ACIMA */
         font-size: 1.1em;
         padding: 12px 10px;
         line-height: 1.5;
+        text-align: center !important; /* Garante centralização */
       }
       
       .botao-iniciar {
@@ -211,29 +212,25 @@
         margin-bottom: 30px;
       }
       
-      /* QUIZ - MANTÉM MESMO ESPAÇAMENTO DA TELA INICIAL */
-      #quiz:not(.oculto) {
-        display: block !important;
-      }
-      
+      /* QUIZ - BARRA DE PROGRESSO MAIS PRÓXIMA DA IMAGEM */
       #quiz img {
         max-width: 230px !important;
-        margin-top: 5px !important; /* MESMO QUE TELA INICIAL */
-        margin-bottom: 5px !important;
+        margin-bottom: 10px !important; /* Reduz espaço abaixo da imagem */
       }
       
       /* BARRA DE PROGRESSO - MAIS PRÓXIMA DA IMAGEM */
       .progress-bar {
         width: 90%;
-        margin: 10px auto 15px auto !important; /* Reduz margem superior */
+        margin: 5px auto 10px auto !important; /* Muito mais próxima */
       }
       
+      /* CORRIGE ALINHAMENTO DO TEXTO - VOLTA AO CENTRO */
       .question {
         font-size: 1.1em;
         margin: 15px 5px 20px 5px;
         padding: 0 8px;
         word-wrap: break-word;
-        text-align: center;
+        text-align: center !important; /* GARANTE centralização */
         line-height: 1.4;
         width: 100%;
         box-sizing: border-box;
@@ -241,6 +238,7 @@
       
       .options {
         margin: 5px 0 15px 0;
+        text-align: center !important; /* Garante centralização */
       }
       
       .options button {
@@ -252,10 +250,11 @@
         margin: 8px auto;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
+        text-align: center !important;
       }
       
-      /* CORREÇÃO DO HOVER NO MOBILE - MANTÉM EFEITO QUANDO PRESSIONADO */
-      /* Remove apenas o problema dos botões ficarem transparentes */
+      /* CORREÇÃO DO HOVER/ACTIVE NO MOBILE - FUNCIONA NO CLIQUE */
+      /* Remove apenas o problema dos botões ficarem transparentes, mas mantém active */
       @media (hover: none) and (pointer: coarse) {
         .options button:hover {
           background: #b22222 !important; /* Mantém cor normal no hover */
@@ -265,6 +264,7 @@
         .options button:active {
           background: #570657 !important; /* Muda para roxo quando pressionado */
           transform: scale(0.98) !important;
+          transition: background-color 0.1s, transform 0.1s;
         }
         
         /* Remove hover do menu e botão iniciar */
@@ -281,6 +281,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center !important;
       }
       
       footer {
@@ -304,9 +305,13 @@
         max-width: 220px !important;
       }
       
+      #telaInicial img {
+        margin-bottom: 20px !important; /* Proporcional para telas pequenas */
+      }
+      
       .mensagem-inicial {
         font-size: 1em;
-        margin-bottom: 15px !important;
+        margin-bottom: 20px !important; /* Proporcional */
         padding: 10px 8px;
       }
       
@@ -470,7 +475,23 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
-          btn.onclick = () => checkAnswer(i);
+          // Adiciona evento touch para mobile
+          btn.addEventListener('touchstart', function() {
+            this.style.backgroundColor = '#570657';
+          });
+          
+          btn.addEventListener('touchend', function() {
+            if (!this.disabled) {
+              this.style.backgroundColor = '#b22222';
+            }
+          });
+          
+          btn.onclick = function() {
+            this.style.backgroundColor = '#570657';
+            setTimeout(() => {
+              checkAnswer(i);
+            }, 150);
+          };
           
           optionsBox.appendChild(btn);
         });
