@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz do Amor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing Script&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -167,7 +167,7 @@
       display: none;
     }
     
-    /* ===== MEDIA QUERIES PARA MOBILE ===== */
+    /* ===== MEDIA QUERIES APENAS PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
       body {
         padding-bottom: 120px;
@@ -190,36 +190,16 @@
         padding-left: 10px;
       }
       
-      /* AJUSTE GERAL DO QUIZ CONTAINER */
-      .quiz-container {
-        margin-top: 70px !important; /* Mesma distância para ambos os containers */
-        margin-left: 0;
-        padding: 0 15px;
-        box-sizing: border-box;
-        width: 100%;
-      }
-      
-      /* TELA INICIAL */
-      .tela-inicial {
-        padding: 0 15px; /* Remove padding top/bottom extra */
-        margin-top: 0;
-      }
-      
-      /* IMAGEM - mesma para tela inicial e quiz */
-      #telaInicial img,
-      #quiz img {
+      /* TELA INICIAL - APENAS AJUSTE DA DISTÂNCIA ENTRE IMAGEM E MENSAGEM */
+      #telaInicial img {
         max-width: 250px !important;
-        margin-top: 0 !important;
-        margin-bottom: 15px !important; /* Distância consistente abaixo da imagem */
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin-top: 5px !important; /* Mantém afastado do menu */
+        margin-bottom: 20px !important; /* DISTÂNCIA IGUAL AO BOTÃO ABAIXO */
       }
       
-      /* MENSAGEM INICIAL - mesma distância acima e abaixo */
       .mensagem-inicial {
-        margin-top: 0 !important;
-        margin-bottom: 25px !important; /* IGUAL à distância do botão abaixo */
+        margin-top: 0 !important; /* Remove margem negativa */
+        margin-bottom: 20px !important; /* IGUAL À DISTÂNCIA DA IMAGEM ACIMA */
         font-size: 1.1em;
         padding: 12px 10px;
         line-height: 1.5;
@@ -228,28 +208,29 @@
       .botao-iniciar {
         padding: 16px 30px;
         font-size: 1.3em;
-        margin-top: 0; /* Já tem margem da mensagem acima */
         margin-bottom: 30px;
       }
       
-      /* QUIZ - aparece quando não oculto */
+      /* QUIZ - MANTÉM MESMO ESPAÇAMENTO DA TELA INICIAL */
       #quiz:not(.oculto) {
         display: block !important;
-        margin-top: 70px !important; /* MESMA distância do menu que a tela inicial */
       }
       
-      /* BARRA DE PROGRESSO - mais próxima da imagem */
+      #quiz img {
+        max-width: 230px !important;
+        margin-top: 5px !important; /* MESMO QUE TELA INICIAL */
+        margin-bottom: 5px !important;
+      }
+      
+      /* BARRA DE PROGRESSO - MAIS PRÓXIMA DA IMAGEM */
       .progress-bar {
         width: 90%;
-        height: 18px;
-        margin: 0 auto 15px auto !important; /* Próximo à imagem, espaço abaixo para pergunta */
-        border-radius: 9px;
+        margin: 10px auto 15px auto !important; /* Reduz margem superior */
       }
       
-      /* PERGUNTA - mais próxima da barra de progresso */
       .question {
         font-size: 1.1em;
-        margin: 10px 5px 15px 5px;
+        margin: 15px 5px 20px 5px;
         padding: 0 8px;
         word-wrap: break-word;
         text-align: center;
@@ -258,12 +239,10 @@
         box-sizing: border-box;
       }
       
-      /* OPÇÕES - mais próximas da pergunta */
       .options {
-        margin: 5px 0 10px 0;
+        margin: 5px 0 15px 0;
       }
       
-      /* BOTÕES DE OPÇÃO - CORREÇÃO DO HOVER NO MOBILE */
       .options button {
         min-width: 150px;
         max-width: 280px;
@@ -271,59 +250,39 @@
         padding: 12px 8px;
         font-size: 1em;
         margin: 8px auto;
-        background: #b22222 !important; /* FORÇA cor de fundo */
-        color: white !important;
-        border: 2px solid #b22222 !important; /* Borda para garantir visibilidade */
-        -webkit-tap-highlight-color: rgba(0,0,0,0.1); /* Highlight sutil */
-        -webkit-user-select: none;
-        user-select: none;
+        -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        opacity: 1 !important; /* Garante que não fique transparente */
       }
       
-      /* REMOVE COMPLETAMENTE HOVER EFFECTS EM TOUCH DEVICES */
-      /* Isso previne botões ficarem transparentes/invisíveis */
+      /* CORREÇÃO DO HOVER NO MOBILE - MANTÉM EFEITO QUANDO PRESSIONADO */
+      /* Remove apenas o problema dos botões ficarem transparentes */
       @media (hover: none) and (pointer: coarse) {
-        .options button:hover,
-        .options button:focus,
-        .options button:active:hover,
-        .options button:focus:hover {
-          background: #b22222 !important;
-          color: white !important;
+        .options button:hover {
+          background: #b22222 !important; /* Mantém cor normal no hover */
           transform: none !important;
-          box-shadow: none !important;
-          opacity: 1 !important;
-          border: 2px solid #b22222 !important;
         }
         
         .options button:active {
-          background: #570657 !important;
-          border-color: #570657 !important;
+          background: #570657 !important; /* Muda para roxo quando pressionado */
           transform: scale(0.98) !important;
-          transition: transform 0.1s;
         }
         
-        /* Remove todos os hovers */
+        /* Remove hover do menu e botão iniciar */
         .botao-iniciar:hover,
         .menu-fixo a:hover {
           transform: none !important;
-          background: inherit !important;
-          box-shadow: none !important;
         }
       }
       
-      /* FEEDBACK - mais próximo dos botões */
       .feedback {
-        height: 30px;
+        height: 35px;
         margin: 5px 0 10px 0;
-        font-size: 1.1em;
+        font-size: 1.2em;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 30px;
       }
       
-      /* RODAPÉ */
       footer {
         padding: 12px 8px;
         font-size: 1.2em;
@@ -331,13 +290,6 @@
         text-align: center;
         box-sizing: border-box;
         word-wrap: break-word;
-      }
-      
-      /* Garante que elementos ocultos não ocupem espaço */
-      .oculto {
-        display: none !important;
-        height: 0 !important;
-        overflow: hidden !important;
       }
     }
     
@@ -348,19 +300,13 @@
         margin-left: 10px;
       }
       
-      .quiz-container {
-        margin-top: 65px !important;
-      }
-      
-      #telaInicial img,
-      #quiz img {
+      #telaInicial img, #quiz img {
         max-width: 220px !important;
-        margin-bottom: 12px !important;
       }
       
       .mensagem-inicial {
         font-size: 1em;
-        margin-bottom: 20px !important; /* Ajuste proporcional */
+        margin-bottom: 15px !important;
         padding: 10px 8px;
       }
       
@@ -372,31 +318,19 @@
       
       .question {
         font-size: 1em;
-        margin: 8px 3px 12px 3px;
+        margin: 12px 3px 18px 3px;
         padding: 0 5px;
       }
       
       .options button {
         padding: 10px 6px;
         font-size: 0.95em;
-        margin: 6px auto;
-        border-width: 1px !important;
+        margin: 7px auto;
       }
       
       footer {
         font-size: 1.1em;
         padding: 10px 6px;
-      }
-    }
-    
-    /* Estilo adicional para garantir botões visíveis durante toque */
-    @media (hover: none) {
-      .options button {
-        -webkit-tap-highlight-color: rgba(87, 6, 87, 0.2);
-      }
-      
-      .options button:focus {
-        outline: none;
       }
     }
   </style>
@@ -503,25 +437,19 @@
 
     // Função para iniciar o quiz
     function iniciarQuiz() {
-      // Esconde tela inicial
       telaInicial.classList.add('oculto');
-      
-      // Mostra quiz
       quiz.classList.remove('oculto');
-      quiz.style.display = 'block';
       
-      // Scroll para o topo
-      window.scrollTo(0, 0);
+      // Scroll para o topo no mobile
+      if (window.innerWidth <= 768) {
+        window.scrollTo(0, 0);
+      }
       
-      // Reinicia quiz
       questions = prepareShuffledQuestions();
       current = 0;
       score = 0;
-      
-      // Carrega primeira pergunta
       loadQuestion();
       
-      // Toca som
       try {
         const inicioSound = new Audio('acertou.mp3');
         inicioSound.currentTime = 0;
@@ -542,14 +470,7 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
-          // Remove qualquer comportamento de hover persistente
-          btn.style.backgroundColor = '#b22222';
-          btn.style.opacity = '1';
-          btn.style.border = window.innerWidth <= 768 ? '2px solid #b22222' : 'none';
-          
-          btn.onclick = function() {
-            checkAnswer(i);
-          };
+          btn.onclick = () => checkAnswer(i);
           
           optionsBox.appendChild(btn);
         });
@@ -574,8 +495,6 @@
         btn.disabled = true;
         btn.style.cursor = 'not-allowed';
         btn.style.opacity = '0.7';
-        btn.style.backgroundColor = '#b22222';
-        btn.style.transform = 'none';
       });
       
       if (i === questions[current].answer) {
@@ -607,12 +526,6 @@
     }
 
     iniciarQuizBtn.addEventListener('click', iniciarQuiz);
-    
-    // Inicialização
-    window.addEventListener('load', function() {
-      // Garante que o quiz esteja oculto
-      quiz.classList.add('oculto');
-    });
   </script>
 </body>
 </html>
