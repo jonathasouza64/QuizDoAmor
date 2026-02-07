@@ -164,34 +164,34 @@
     }
 
     .oculto {
-      display: none !important;
+      display: none;
     }
     
     /* ===== MEDIA QUERIES PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
       body {
         padding-bottom: 120px;
-        overflow-x: hidden; /* Previne scroll horizontal */
+        overflow-x: hidden;
       }
       
       .menu-fixo {
         padding: 8px 0;
-        text-align: left; /* Alinha à esquerda no mobile */
+        text-align: left;
       }
       
       .menu-fixo a {
         font-size: 28px;
-        margin-left: 15px; /* Espaço da esquerda */
+        margin-left: 15px;
       }
       
       .menu-fixo ul {
-        justify-content: flex-start !important; /* Força alinhamento à esquerda */
+        justify-content: flex-start !important;
         gap: 0;
         padding-left: 10px;
       }
       
       .quiz-container {
-        margin-top: 70px; /* Reduz espaço do menu */
+        margin-top: 70px;
         margin-left: 0;
         padding: 0 15px;
         box-sizing: border-box;
@@ -199,20 +199,21 @@
       }
       
       .tela-inicial {
-        padding: 10px 15px;
-        margin-top: 10px; /* Menos espaço acima */
+        padding: 10px 15px 0 15px; /* Reduz padding bottom para aproximar elementos */
+        margin-top: 10px;
       }
       
-      /* Ajusta imagem para ficar mais próxima do menu */
+      /* Ajusta imagem para ficar MUITO mais próxima do menu */
       #telaInicial img {
         max-width: 250px !important;
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
+        margin-top: 0 !important; /* Zera a margem superior */
+        margin-bottom: 0 !important; /* Zera a margem inferior */
       }
       
+      /* Mensagem inicial MUITO mais próxima da imagem */
       .mensagem-inicial {
-        margin-top: 10px !important; /* Próxima da imagem */
-        margin-bottom: 20px;
+        margin-top: 0 !important; /* Zera a margem superior */
+        margin-bottom: 15px !important; /* Reduz margem inferior */
         font-size: 1.1em;
         padding: 12px 10px;
         line-height: 1.5;
@@ -221,15 +222,13 @@
       .botao-iniciar {
         padding: 16px 30px;
         font-size: 1.3em;
+        margin-top: 10px; /* Adiciona margem superior */
         margin-bottom: 30px;
       }
       
-      /* QUIZ - Esconde completamente no mobile até clicar */
+      /* QUIZ - MOSTRA quando não está oculto */
       #quiz.oculto {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        overflow: hidden !important;
+        display: none;
       }
       
       #quiz:not(.oculto) {
@@ -240,18 +239,18 @@
       
       #quiz img {
         max-width: 230px !important;
-        margin-top: 5px !important;
+        margin-top: 0 !important;
         margin-bottom: 5px !important;
       }
       
       .progress-bar {
         width: 90%;
-        margin: 10px auto 15px auto !important; /* Mais próximo da imagem */
+        margin: 5px auto 10px auto !important; /* Ainda mais próximo */
       }
       
       .question {
         font-size: 1.1em;
-        margin: 15px 5px 20px 5px; /* Menos margem superior, mais inferior */
+        margin: 10px 5px 15px 5px; /* Reduzido ainda mais */
         padding: 0 8px;
         word-wrap: break-word;
         text-align: center;
@@ -261,7 +260,7 @@
       }
       
       .options {
-        margin: 5px 0 15px 0; /* Menos espaçamento */
+        margin: 5px 0 10px 0; /* Reduzido */
       }
       
       .options button {
@@ -270,12 +269,12 @@
         width: 95%;
         padding: 12px 8px;
         font-size: 1em;
-        margin: 8px auto; /* Botões mais próximos */
+        margin: 6px auto; /* Botões ainda mais próximos */
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
       }
       
-      /* CORREÇÃO DO HOVER NO MOBILE - IMPORTANTE */
+      /* CORREÇÃO DO HOVER NO MOBILE */
       @media (hover: none) {
         .options button:hover {
           background: #b22222 !important;
@@ -288,7 +287,7 @@
         }
       }
       
-      /* Remove completamente hover effects em touch devices */
+      /* Remove hover effects em touch devices */
       @media (hover: none) and (pointer: coarse) {
         .options button:hover,
         .botao-iniciar:hover,
@@ -297,16 +296,12 @@
           background: inherit !important;
           box-shadow: none !important;
         }
-        
-        .options button:focus {
-          outline: none;
-        }
       }
       
       .feedback {
-        height: 35px;
-        margin: 5px 0 10px 0; /* Mais próximo dos botões */
-        font-size: 1.2em;
+        height: 30px;
+        margin: 3px 0 8px 0; /* Mais próximo ainda */
+        font-size: 1.1em;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -319,11 +314,6 @@
         text-align: center;
         box-sizing: border-box;
         word-wrap: break-word;
-      }
-      
-      /* Garante que o quiz não seja visível ao rolar */
-      .quiz-container:not(#telaInicial) {
-        position: relative;
       }
     }
     
@@ -344,26 +334,28 @@
       
       .mensagem-inicial {
         font-size: 1em;
-        margin-top: 5px !important;
+        margin-top: 0 !important;
+        margin-bottom: 10px !important; /* Reduzido ainda mais */
         padding: 10px 8px;
       }
       
       .botao-iniciar {
         padding: 14px 25px;
         font-size: 1.2em;
+        margin-top: 5px;
         margin-bottom: 25px;
       }
       
       .question {
         font-size: 1em;
-        margin: 12px 3px 18px 3px;
+        margin: 8px 3px 12px 3px; /* Reduzido */
         padding: 0 5px;
       }
       
       .options button {
         padding: 10px 6px;
         font-size: 0.95em;
-        margin: 7px auto;
+        margin: 5px auto; /* Reduzido */
       }
       
       footer {
@@ -473,21 +465,32 @@
     const feedbackBox = document.getElementById("feedback");
     const progressBar = document.getElementById("progress");
 
-    // Função para iniciar o quiz
+    // Função para iniciar o quiz - CORRIGIDA
     function iniciarQuiz() {
+      console.log("Botão clicado - Iniciando quiz");
+      
+      // Esconde tela inicial
       telaInicial.classList.add('oculto');
+      
+      // Remove classe oculto do quiz
       quiz.classList.remove('oculto');
+      quiz.style.display = 'block';
+      quiz.style.visibility = 'visible';
       
       // Scroll para o topo no mobile
       if (window.innerWidth <= 768) {
         window.scrollTo(0, 0);
       }
       
+      // Reinicia o quiz
       questions = prepareShuffledQuestions();
       current = 0;
       score = 0;
+      
+      // Carrega primeira pergunta
       loadQuestion();
       
+      // Toca som
       try {
         const inicioSound = new Audio('acertou.mp3');
         inicioSound.currentTime = 0;
@@ -498,7 +501,7 @@
     }
 
     function loadQuestion() {
-      // SEMPRE limpa o feedback ao carregar nova pergunta
+      // Limpa o feedback
       feedbackBox.innerHTML = "";
       
       if (current < questions.length) {
@@ -509,18 +512,18 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
-          // Remove qualquer estado de hover persistente
+          // Evento para mobile - remove hover persistente
           btn.addEventListener('touchstart', function() {
             this.style.backgroundColor = '#570657';
           });
           
           btn.addEventListener('touchend', function() {
-            this.style.backgroundColor = '#b22222';
+            setTimeout(() => {
+              this.style.backgroundColor = '#b22222';
+            }, 100);
           });
           
           btn.onclick = function() {
-            // Remove hover effect antes de processar
-            this.style.backgroundColor = '#570657';
             checkAnswer(i);
           };
           
@@ -529,11 +532,10 @@
         
         updateProgress();
       } else {
-        // QUANDO TERMINAR AS PERGUNTAS
+        // Fim do quiz
         if (score === questions.length) {
           window.location.href = "perguntaPedidoNamoro.html";
         } else {
-          // Espera 1 segundo para mostrar mensagem final
           setTimeout(() => {
             questionBox.innerHTML = "<p>Você precisa acertar todas as respostas para liberar a surpresa!❤️</p>";
             optionsBox.innerHTML = "<button onclick='restartQuiz()'>Tentar novamente</button>";
@@ -544,18 +546,17 @@
     }
 
     function checkAnswer(i) {
-      // Desabilita todos os botões para evitar múltiplos cliques
+      // Desabilita botões
       const buttons = optionsBox.querySelectorAll('button');
       buttons.forEach(btn => {
         btn.disabled = true;
         btn.style.cursor = 'not-allowed';
         btn.style.opacity = '0.7';
-        // Remove hover effect
         btn.style.backgroundColor = '#b22222';
         btn.style.transform = 'none';
       });
       
-      // Mostra feedback
+      // Feedback
       if (i === questions[current].answer) {
         score++;
         feedbackBox.innerHTML = "<span style='color:green'>Acertou! 💖</span>";
@@ -567,10 +568,8 @@
         soundErro.play();
       }
       
-      // Avança para próxima pergunta ou final
+      // Próxima pergunta
       current++;
-      
-      // Se ainda tem perguntas, espera 1 segundo e vai para próxima
       setTimeout(loadQuestion, 1000);
     }
 
@@ -589,12 +588,9 @@
 
     iniciarQuizBtn.addEventListener('click', iniciarQuiz);
     
-    // Previne que o quiz seja visível antes do clique no mobile
+    // Garante que o quiz esteja realmente oculto no início
     window.addEventListener('load', function() {
-      if (window.innerWidth <= 768) {
-        quiz.style.display = 'none';
-        quiz.style.visibility = 'hidden';
-      }
+      quiz.classList.add('oculto');
     });
   </script>
 </body>
