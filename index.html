@@ -167,9 +167,169 @@
       display: none;
     }
     
+    /* ===== MEDIA QUERIES PARA MOBILE ===== */
+    @media only screen and (max-width: 768px) {
+      body {
+        padding-bottom: 120px; /* Mais espaço para o rodapé */
+      }
+      
+      .menu-fixo {
+        padding: 10px 0;
+      }
+      
+      .menu-fixo a {
+        font-size: 28px; /* Reduz tamanho do título no mobile */
+      }
+      
+      .menu-fixo ul {
+        justify-content: center; /* Centraliza no mobile */
+        gap: 0;
+        padding: 0 10px;
+      }
+      
+      .quiz-container {
+        margin-top: 80px; /* Mais espaço do menu fixo */
+        margin-left: 0; /* Remove margem negativa */
+        padding: 0 15px; /* Padding lateral para não cortar texto */
+        box-sizing: border-box;
+      }
+      
+      .tela-inicial {
+        padding: 15px;
+        margin-top: 20px;
+      }
+      
+      .mensagem-inicial {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        font-size: 1.1em;
+        padding: 15px 10px;
+      }
+      
+      .botao-iniciar {
+        padding: 18px 30px;
+        font-size: 1.3em;
+        margin-bottom: 40px; /* Espaço extra para não colar no rodapé */
+      }
+      
+      .question {
+        font-size: 1.1em;
+        margin: 25px 10px;
+        padding: 0 5px;
+        word-wrap: break-word;
+        text-align: center;
+      }
+      
+      .options {
+        margin-bottom: 40px; /* Espaço para feedback e rodapé */
+      }
+      
+      .options button {
+        min-width: 160px;
+        max-width: 280px;
+        width: 90%;
+        padding: 14px 10px;
+        font-size: 1em;
+        margin: 12px auto;
+        -webkit-tap-highlight-color: transparent; /* Remove highlight no touch */
+      }
+      
+      /* Corrige problema do hover no mobile */
+      .options button:hover, 
+      .options button:active {
+        background: #b22222; /* Mantém cor original até clique */
+        transform: none;
+      }
+      
+      .options button:active {
+        background: #570657; /* Só muda cor quando pressionado */
+        transform: scale(0.98);
+      }
+      
+      .feedback {
+        height: 40px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .progress-bar {
+        width: 90%;
+        margin: 30px auto;
+      }
+      
+      footer {
+        padding: 15px 10px;
+        font-size: 1.2em;
+        line-height: 1.4;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      
+      /* Ajusta imagem do quiz */
+      #quiz img, #telaInicial img {
+        max-width: 250px !important;
+        margin-top: 10px;
+      }
+      
+      /* Ajusta container do quiz quando ativo */
+      #quiz {
+        min-height: calc(100vh - 200px); /* Garante altura mínima */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-bottom: 40px;
+      }
+    }
+    
+    /* Ajustes para telas muito pequenas (iPhone SE, etc) */
+    @media only screen and (max-width: 375px) {
+      .menu-fixo a {
+        font-size: 24px;
+      }
+      
+      .mensagem-inicial {
+        font-size: 1em;
+      }
+      
+      .botao-iniciar {
+        padding: 16px 25px;
+        font-size: 1.2em;
+      }
+      
+      footer {
+        font-size: 1.1em;
+        padding: 12px 8px;
+      }
+      
+      .question {
+        font-size: 1em;
+      }
+    }
+    
+    /* Remove hover effects em dispositivos touch */
+    @media (hover: none) and (pointer: coarse) {
+      .botao-iniciar:hover {
+        transform: none;
+        box-shadow: none;
+      }
+      
+      .menu-fixo a:hover {
+        transform: none;
+      }
+      
+      .options button:hover {
+        transform: none;
+        background: #b22222;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- O restante do código HTML permanece igual -->
   <nav class="menu-fixo">
     <ul>
       <li><a href="#">💌Jonathan & Audrey</a></li>
