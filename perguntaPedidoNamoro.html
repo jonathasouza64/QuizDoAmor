@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonte romântica -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <title>Aceita a Namorar Comigo</title>
+</head>
+<style>
+      /* RODAPÉ FIXO */
+      footer {
+        position: fixed;   /* fixa no viewport */
+        bottom: 0;         /* cola no final da tela */
+        left: 0;
+        width: 100%;       /* ocupa toda a largura */
+        text-align: center;
+        padding: 20px;
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.5em;
+        color: #b22222;
+        background: #fff0f5;
+        /*border-top: 0.5px solid #570657; */
+        border-bottom: 10px solid #570657; /* borda na parte de baixo */
+      }
+
+
+      /* garante que o conteúdo não fique escondido atrás do rodapé */
+      body {
+        margin: 0;
+        padding-bottom: 80px; 
+      }
+</style>
+<body>
+    <nav class="menu-fixo">
+        <ul>
+          <li><a href="#">💌Jonathan & Audrey </a></li>
+        </ul>
+    </nav>
+
+    <div class="image-container">
+        <img src="namoracomigo.png" width="3000" height="600"
+             alt="Pedido de namoro."  
+             class="responsive-image">
+    </div>
+
+    <div class="container" id="container">
+        <button class="btn btn-yes">Sim</button>
+        <button class="btn btn-nao">Não</button>
+    </div>
+
+    <!-- Rodapé fixo -->
+    <footer>
+        O começo de uma grande história❤️
+    </footer>
+
+    <script src="main.js"></script>
+    
+</body>
+</html>
