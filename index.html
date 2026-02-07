@@ -167,175 +167,33 @@
       display: none;
     }
     
-    /* ===== MEDIA QUERIES APENAS PARA MOBILE ===== */
+    /* ===== APENAS OS AJUSTES ESPECÍFICOS PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
-      body {
-        padding-bottom: 120px;
-        overflow-x: hidden;
-      }
-      
-      .menu-fixo {
-        padding: 8px 0;
-        text-align: left;
-      }
-      
-      .menu-fixo a {
-        font-size: 28px;
-        margin-left: 15px;
-      }
-      
-      .menu-fixo ul {
-        justify-content: flex-start !important;
-        gap: 0;
-        padding-left: 10px;
-      }
-      
-      /* TELA INICIAL - APENAS AJUSTE DA DISTÂNCIA ENTRE IMAGEM E MENSAGEM */
-      /* O botão tem margin-bottom: 25px no desktop, vamos usar a mesma proporção */
+      /* 1. DISTÂNCIA IMAGEM → MENSAGEM = MENSAGEM → BOTÃO */
       #telaInicial img {
-        max-width: 250px !important;
-        margin-bottom: 25px !important; /* MESMA DISTÂNCIA QUE O BOTÃO TEM */
+        margin-bottom: 15px !important; /* IGUAL ao margin-bottom da mensagem */
       }
       
       .mensagem-inicial {
-        margin-top: 0 !important; /* Remove margem negativa */
-        margin-bottom: 25px !important; /* MESMA DISTÂNCIA QUE A IMAGEM TEM ACIMA */
-        font-size: 1.1em;
-        padding: 12px 10px;
-        line-height: 1.5;
-        text-align: center !important; /* Garante centralização */
+        margin-top: 0 !important;
+        margin-bottom: 15px !important; /* IGUAL ao margin-bottom da imagem */
       }
       
-      .botao-iniciar {
-        padding: 16px 30px;
-        font-size: 1.3em;
-        margin-bottom: 30px;
-      }
-      
-      /* QUIZ - BARRA DE PROGRESSO MAIS PRÓXIMA DA IMAGEM */
+      /* 2. BARRA DE PROGRESSO MAIS PRÓXIMA DA IMAGEM NO QUIZ */
       #quiz img {
-        max-width: 230px !important;
-        margin-bottom: 10px !important; /* Reduz espaço abaixo da imagem */
+        margin-bottom: 5px !important; /* Próxima da barra */
       }
       
-      /* BARRA DE PROGRESSO - MAIS PRÓXIMA DA IMAGEM */
       .progress-bar {
-        width: 90%;
         margin: 5px auto 10px auto !important; /* Muito mais próxima */
       }
       
-      /* CORRIGE ALINHAMENTO DO TEXTO - VOLTA AO CENTRO */
-      .question {
-        font-size: 1.1em;
-        margin: 15px 5px 20px 5px;
-        padding: 0 8px;
-        word-wrap: break-word;
-        text-align: center !important; /* GARANTE centralização */
-        line-height: 1.4;
-        width: 100%;
-        box-sizing: border-box;
-      }
+      /* 3. CORRIGIR ALINHAMENTO DO TEXTO (não deveria ter mudado) */
+      /* REMOVA qualquer text-align: left que possa ter sido adicionado */
       
-      .options {
-        margin: 5px 0 15px 0;
-        text-align: center !important; /* Garante centralização */
-      }
-      
-      .options button {
-        min-width: 150px;
-        max-width: 280px;
-        width: 95%;
-        padding: 12px 8px;
-        font-size: 1em;
-        margin: 8px auto;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-        text-align: center !important;
-      }
-      
-      /* CORREÇÃO DO HOVER/ACTIVE NO MOBILE - FUNCIONA NO CLIQUE */
-      /* Remove apenas o problema dos botões ficarem transparentes, mas mantém active */
-      @media (hover: none) and (pointer: coarse) {
-        .options button:hover {
-          background: #b22222 !important; /* Mantém cor normal no hover */
-          transform: none !important;
-        }
-        
-        .options button:active {
-          background: #570657 !important; /* Muda para roxo quando pressionado */
-          transform: scale(0.98) !important;
-          transition: background-color 0.1s, transform 0.1s;
-        }
-        
-        /* Remove hover do menu e botão iniciar */
-        .botao-iniciar:hover,
-        .menu-fixo a:hover {
-          transform: none !important;
-        }
-      }
-      
-      .feedback {
-        height: 35px;
-        margin: 5px 0 10px 0;
-        font-size: 1.2em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center !important;
-      }
-      
-      footer {
-        padding: 12px 8px;
-        font-size: 1.2em;
-        line-height: 1.3;
-        text-align: center;
-        box-sizing: border-box;
-        word-wrap: break-word;
-      }
-    }
-    
-    /* Ajustes para telas muito pequenas */
-    @media only screen and (max-width: 375px) {
-      .menu-fixo a {
-        font-size: 24px;
-        margin-left: 10px;
-      }
-      
-      #telaInicial img, #quiz img {
-        max-width: 220px !important;
-      }
-      
-      #telaInicial img {
-        margin-bottom: 20px !important; /* Proporcional para telas pequenas */
-      }
-      
-      .mensagem-inicial {
-        font-size: 1em;
-        margin-bottom: 20px !important; /* Proporcional */
-        padding: 10px 8px;
-      }
-      
-      .botao-iniciar {
-        padding: 14px 25px;
-        font-size: 1.2em;
-        margin-bottom: 25px;
-      }
-      
-      .question {
-        font-size: 1em;
-        margin: 12px 3px 18px 3px;
-        padding: 0 5px;
-      }
-      
-      .options button {
-        padding: 10px 6px;
-        font-size: 0.95em;
-        margin: 7px auto;
-      }
-      
-      footer {
-        font-size: 1.1em;
-        padding: 10px 6px;
+      /* 4. EFEITO ATIVO NO MOBILE - BOTÃO FICA ROXO AO CLICAR */
+      .options button:active {
+        background: #570657 !important;
       }
     }
   </style>
@@ -475,22 +333,19 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
-          // Adiciona evento touch para mobile
+          // Adiciona efeito de clique no mobile
           btn.addEventListener('touchstart', function() {
-            this.style.backgroundColor = '#570657';
+            this.classList.add('active');
           });
           
           btn.addEventListener('touchend', function() {
-            if (!this.disabled) {
-              this.style.backgroundColor = '#b22222';
-            }
+            this.classList.remove('active');
           });
           
           btn.onclick = function() {
+            // Força o botão ficar roxo ao clicar
             this.style.backgroundColor = '#570657';
-            setTimeout(() => {
-              checkAnswer(i);
-            }, 150);
+            checkAnswer(i);
           };
           
           optionsBox.appendChild(btn);
@@ -516,6 +371,7 @@
         btn.disabled = true;
         btn.style.cursor = 'not-allowed';
         btn.style.opacity = '0.7';
+        btn.style.backgroundColor = '#b22222'; // Volta ao vermelho após resposta
       });
       
       if (i === questions[current].answer) {
