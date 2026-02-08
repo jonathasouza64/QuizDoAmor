@@ -305,6 +305,8 @@
     @media only screen and (max-width: 768px) {
       body {
         padding-bottom: 160px; /* Aumentado para mobile */
+        overflow-x: hidden; /* IMPEDE MOVIMENTO LATERAL */
+        width: 100%;
       }
       
       footer {
@@ -317,12 +319,17 @@
       .quiz-container {
         margin-top: 20px;
         margin-left: 0; /* REMOVIDO O -15px que empurrava para a direita */
-        padding: 0 15px;
+        padding: 0;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
       }
       
       .question {
-        padding: 0 5px;
+        padding: 0 15px;
         word-wrap: break-word;
+        font-size: 1.1em;
+        margin: 15px 0;
       }
       
       .feedback {
@@ -332,43 +339,63 @@
       
       #containerTelas {
         min-height: 500px; /* Aumentado para mobile */
-        padding: 0 10px;
+        padding: 0;
         padding-bottom: 60px; /* Mais espaço no mobile */
+        width: 100%;
+        box-sizing: border-box;
       }
       
       #telaInicial,
       #quiz,
       #telaVitoria {
         max-width: 100%;
-        padding: 0 10px;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
       }
       
-      /* IMAGENS UM POUCO MENORES NO MOBILE */
+      /* IMAGENS PROPORCIONAIS NO MOBILE */
       #telaInicial img,
       #quiz img,
       #telaVitoria img {
-        max-width: 280px !important; /* Reduzido apenas no mobile */
+        max-width: 85% !important; /* PROPORCIONAL À TELA */
+        margin-bottom: 10px !important;
+      }
+      
+      /* CORRIGINDO ESPAÇAMENTO DA BARRA DE PROGRESSO */
+      #quiz .progress-bar {
+        margin-top: 10px !important; /* ESPAÇAMENTO CORRETO */
+        margin-bottom: 20px;
+        width: 90%;
       }
       
       /* TELA DE VITÓRIA - APENAS NO MOBILE */
       #telaVitoria img {
-        margin-bottom: 30px !important; /* Reduzido apenas no mobile */
+        margin-bottom: 30px !important;
       }
       
-      /* MENSAGEM INICIAL - APENAS NO MOBILE */
+      /* MENSAGENS MAIS COMPACTAS E PROPORCIONAIS */
+      .mensagem-inicial,
+      .mensagem-vitoria {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 12px 8px;
+        box-sizing: border-box;
+      }
+      
       .mensagem-inicial {
         font-size: 1.1em;
-        margin-top: -40px;
+        line-height: 1.5;
+        margin-top: -30px;
         margin-bottom: 20px;
-        padding: 12px;
       }
       
-      /* MENSAGEM VITÓRIA - APENAS NO MOBILE */
       .mensagem-vitoria {
         font-size: 1.1em;
-        margin-top: -30px;
+        line-height: 1.4;
+        margin-top: -25px;
         margin-bottom: 15px;
-        padding: 10px;
       }
       
       .mensagem-vitoria p:first-child {
@@ -376,13 +403,45 @@
         margin-bottom: 8px;
       }
       
+      /* BOTÕES PROPORCIONAIS */
+      .botao-iniciar,
       .botao-recompensa {
-        margin-bottom: 100px !important; /* MAIS ESPAÇO NO MOBILE */
+        width: 90%;
+        max-width: 300px;
+        padding: 14px 30px;
+        font-size: 1.1em;
+        margin-bottom: 20px;
+        box-sizing: border-box;
       }
       
-      /* REMOVER MARGEM NEGATIVA DA BARRA DE PROGRESSO NO MOBILE */
-      #quiz .progress-bar {
-        margin-top: 0 !important;
+      .botao-recompensa {
+        margin-bottom: 100px !important;
+      }
+      
+      /* OPÇÕES DE RESPOSTA PROPORCIONAIS */
+      .options button {
+        width: 90%;
+        max-width: 280px;
+        padding: 12px 15px;
+        margin: 8px auto;
+        font-size: 0.95em;
+        min-height: 45px;
+      }
+      
+      /* BOTÕES FICANDO ROXOS QUANDO PRESSIONADOS - RESTAURADO */
+      .options button:active {
+        background: #570657 !important;
+        transform: scale(0.95) !important;
+      }
+      
+      .botao-iniciar:active {
+        background: #570657 !important;
+        transform: scale(0.95) !important;
+      }
+      
+      .botao-recompensa:active {
+        background: #1e7e34 !important;
+        transform: scale(0.95) !important;
       }
       
       @media (hover: none) and (pointer: coarse) {
@@ -397,19 +456,20 @@
         .botao-recompensa:hover {
           background: #28a745 !important;
         }
-      }
-      
-      .options button:active,
-      .botao-iniciar:active,
-      .botao-recompensa:active {
-        background: #570657 !important;
-        transform: scale(0.95) !important;
-        transition: background-color 0.1s, transform 0.1s !important;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
-      }
-      
-      .botao-recompensa:active {
-        background: #1e7e34 !important;
+        
+        /* GARANTIR QUE OS BOTÕES FICAM ROXOS AO TOCAR */
+        .options button:active,
+        .botao-iniciar:active,
+        .botao-recompensa:active {
+          background: #570657 !important;
+          transform: scale(0.95) !important;
+          transition: background-color 0.1s, transform 0.1s !important;
+          box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
+        }
+        
+        .botao-recompensa:active {
+          background: #1e7e34 !important;
+        }
       }
     }
     
@@ -427,33 +487,92 @@
         min-height: 480px; /* Ajustado para telas pequenas */
       }
       
-      /* IMAGENS AINDA MENORES EM TELAS PEQUENAS */
+      /* IMAGENS AINDA MAIS PROPORCIONAIS */
       #telaInicial img,
       #quiz img,
       #telaVitoria img {
-        max-width: 250px !important;
+        max-width: 80% !important;
       }
       
       /* MENSAGENS AINDA MAIS COMPACTAS */
       .mensagem-inicial {
         font-size: 1.0em;
-        margin-top: -30px;
-        padding: 10px;
+        margin-top: -20px;
+        padding: 10px 6px;
       }
       
       .mensagem-vitoria {
         font-size: 1.0em;
-        margin-top: -20px;
-        padding: 8px;
+        margin-top: -15px;
+        padding: 8px 6px;
       }
       
       .mensagem-vitoria p:first-child {
-        font-size: 1.2em;
+        font-size: 1.15em;
+      }
+      
+      /* BOTÕES MAIS COMPACTOS */
+      .botao-iniciar,
+      .botao-recompensa {
+        padding: 12px 25px !important;
+        font-size: 1.0em !important;
+        width: 95%;
       }
       
       .botao-recompensa {
-        margin-bottom: 90px !important; /* Ajuste para telas muito pequenas */
-        padding: 13px 35px; /* Botão um pouco menor */
+        margin-bottom: 90px !important;
+      }
+      
+      /* OPÇÕES MAIS COMPACTAS */
+      .options button {
+        width: 95%;
+        max-width: 260px;
+        padding: 10px 12px;
+        margin: 6px auto;
+        font-size: 0.9em;
+      }
+      
+      /* BARRA DE PROGRESSO MAIS COMPACTA */
+      .progress-bar {
+        width: 95%;
+      }
+    }
+    
+    /* AJUSTE PARA TELAS MUITO PEQUENAS */
+    @media only screen and (max-width: 320px) {
+      #telaInicial img,
+      #quiz img,
+      #telaVitoria img {
+        max-width: 75% !important;
+      }
+      
+      .mensagem-inicial {
+        font-size: 0.95em;
+        padding: 8px 5px;
+      }
+      
+      .mensagem-vitoria {
+        font-size: 0.95em;
+        padding: 7px 5px;
+      }
+      
+      .mensagem-vitoria p:first-child {
+        font-size: 1.1em;
+      }
+      
+      .botao-iniciar,
+      .botao-recompensa {
+        padding: 10px 20px !important;
+        font-size: 0.95em !important;
+      }
+      
+      .options button {
+        padding: 9px 10px;
+        font-size: 0.85em;
+      }
+      
+      .question {
+        font-size: 1.0em;
       }
     }
   </style>
