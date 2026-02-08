@@ -7,19 +7,17 @@ btnNao.style.minWidth = "80px";
 // VERIFICA SE É DISPOSITIVO MOBILE
 const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-// FUNÇÃO PARA FAZER BOTÃO FICAR ROXO AO CLICAR
-function makeButtonPurpleOnClick(button) {
+// FUNÇÃO PARA FAZER BOTÃO SIM FICAR ROXO AO CLICAR (APENAS BOTÃO SIM)
+function makeYesButtonPurpleOnClick(button) {
     if (isMobile) {
-        // VERSÃO MOBILE - TOUCH
-        button.addEventListener('touchstart', function(e) {
-            e.preventDefault();
+        // VERSÃO MOBILE - TOUCH (SEM preventDefault)
+        button.addEventListener('touchstart', function() {
             this.classList.add('active-click');
             this.style.backgroundColor = '#570657';
             this.style.transform = 'scale(0.92)';
         });
         
-        button.addEventListener('touchend', function(e) {
-            e.preventDefault();
+        button.addEventListener('touchend', function() {
             setTimeout(() => {
                 this.classList.remove('active-click');
                 this.style.backgroundColor = '';
@@ -27,8 +25,7 @@ function makeButtonPurpleOnClick(button) {
             }, 200);
         });
         
-        button.addEventListener('touchcancel', function(e) {
-            e.preventDefault();
+        button.addEventListener('touchcancel', function() {
             this.classList.remove('active-click');
             this.style.backgroundColor = '';
             this.style.transform = '';
@@ -51,8 +48,8 @@ function makeButtonPurpleOnClick(button) {
     }
 }
 
-// Aplica efeito roxo ao botão Sim
-makeButtonPurpleOnClick(btnYes);
+// Aplica efeito roxo APENAS ao botão Sim
+makeYesButtonPurpleOnClick(btnYes);
 
 // Redireciona para a próxima página ao clicar em "Sim"
 btnYes.addEventListener("click", function () {
@@ -112,7 +109,8 @@ document.addEventListener("mousemove", function (event) {
     }
 });
 
-btnNao.addEventListener("touchstart", function () {
+btnNao.addEventListener("touchstart", function (e) {
+    e.preventDefault(); // APENAS para o botão Não podemos prevenir
     moveButton();
 });
 
@@ -133,5 +131,19 @@ if (window.innerWidth <= 768) {
     btnNao.style.minWidth = "70px";
 }
 
-// Aplica efeito roxo ao botão Não também (opcional)
-makeButtonPurpleOnClick(btnNao);
+// CSS - APENAS para o botão Sim ficar roxo
+const style = document.createElement('style');
+style.textContent = `
+    .btn-yes.active-click {
+        background-color: #570657 !important;
+        transform: scale(0.95);
+    }
+    
+    @media (max-width: 768px) {
+        .btn-yes:active {
+            background-color: #570657 !important;
+            transform: scale(0.92) !important;
+        }
+    }
+`;
+document.head.appendChild(style);
