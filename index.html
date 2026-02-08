@@ -56,6 +56,7 @@
       margin-top: 20px;
       margin-left: -15px; 
       margin-right: auto;
+      transition: opacity 0.5s ease, transform 0.5s ease; /* Adicionado transição */
     }
 
     .tela-inicial {
@@ -87,7 +88,7 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
-      -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3); /* Adicionado */
+      -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3);
     }
 
     .botao-iniciar:hover {
@@ -179,6 +180,27 @@
 
     .oculto {
       display: none;
+      opacity: 0;
+      transform: translateY(20px); /* Efeito de entrada */
+    }
+    
+    /* Classe para transição suave */
+    .mostrando {
+      display: block !important;
+      opacity: 1;
+      transform: translateY(0);
+      animation: apareceSuave 0.8s ease forwards; /* Animação de entrada */
+    }
+    
+    @keyframes apareceSuave {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     /* ===== MEDIA QUERIES PARA MOBILE ===== */
@@ -372,23 +394,42 @@
     // Configura eventos touch para o botão iniciar
     setupTouchEventsForButton(iniciarQuizBtn);
 
-    // Função para iniciar o quiz
+    // Função para iniciar o quiz COM TRANSITION
     function iniciarQuiz() {
-      telaInicial.classList.add('oculto');
-      quiz.classList.remove('oculto');
+      // 1. Primeiro, adiciona efeito de saída na tela inicial
+      telaInicial.style.opacity = '0';
+      telaInicial.style.transform = 'translateY(-20px)';
       
-      questions = prepareShuffledQuestions();
-      current = 0;
-      score = 0;
-      loadQuestion();
-      
-      try {
-        const inicioSound = new Audio('acertou.mp3');
-        inicioSound.currentTime = 0;
-        inicioSound.play();
-      } catch (e) {
-        console.log("Erro ao tocar som de início:", e);
-      }
+      // 2. Espera 300ms para a transição de saída
+      setTimeout(() => {
+        // Esconde tela inicial
+        telaInicial.classList.add('oculto');
+        telaInicial.style.opacity = '';
+        telaInicial.style.transform = '';
+        
+        // 3. Remove classe oculto e adiciona classe de transição
+        quiz.classList.remove('oculto');
+        quiz.classList.add('mostrando');
+        
+        // Scroll para o topo
+        window.scrollTo(0, 0);
+        
+        // 4. Espera mais um pouco antes de carregar as perguntas
+        setTimeout(() => {
+          questions = prepareShuffledQuestions();
+          current = 0;
+          score = 0;
+          loadQuestion();
+          
+          try {
+            const inicioSound = new Audio('acertou.mp3');
+            inicioSound.currentTime = 0;
+            inicioSound.play();
+          } catch (e) {
+            console.log("Erro ao tocar som de início:", e);
+          }
+        }, 300);
+      }, 300);
     }
 
     function loadQuestion() {
