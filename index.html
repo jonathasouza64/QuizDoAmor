@@ -11,7 +11,7 @@
       background: #fff0f5;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-bottom: 80px;
+      padding-bottom: 150px; /* AUMENTADO para dar mais espaço para o rodapé */
     }
 
     .menu-fixo {
@@ -56,7 +56,7 @@
       margin-top: 20px;
       margin-left: -15px; 
       margin-right: auto;
-      transition: opacity 0.5s ease, transform 0.5s ease; /* Adicionado transição */
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .tela-inicial {
@@ -77,6 +77,14 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
+    /* MENSAGEM ESPECÍFICA PARA TELA DE VITÓRIA - FONTE MENOR */
+    #telaVitoria .mensagem-inicial {
+      font-size: 1.15em; /* Reduzido de 1.3em para 1.15em */
+      line-height: 1.5;
+      margin-top: -30px; /* Ajustado para compensar a fonte menor */
+      margin-bottom: 20px;
+    }
+
     .botao-iniciar {
       background: #b22222;
       color: white;
@@ -88,6 +96,7 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
+      margin-bottom: 20px; /* Adicionado espaço abaixo */
       -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3);
     }
 
@@ -97,10 +106,36 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
-    /* CORREÇÃO: BOTÃO FICAR ROXO QUANDO PRESSIONADO */
     .botao-iniciar:active {
       background: #570657 !important;
       transform: scale(0.95) !important;
+    }
+
+    /* BOTÃO VERDE PARA VITÓRIA */
+    .botao-recompensa {
+      background: #28a745 !important;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.2em;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Dancing Script', cursive;
+      font-weight: bold;
+      margin-bottom: 80px !important; /* ESPAÇO EXTRA PARA NÃO FICAR NO RODAPÉ */
+      -webkit-tap-highlight-color: rgba(40, 167, 69, 0.3);
+    }
+    
+    .botao-recompensa:hover {
+      background: #218838 !important;
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    
+    .botao-recompensa:active {
+      background: #1e7e34 !important;
+      transform: scale(0.95);
     }
 
     .question {
@@ -134,7 +169,6 @@
       transform: scale(1.05);
     }
 
-    /* CORREÇÃO: BOTÕES FICAREM ROXOS QUANDO PRESSIONADOS */
     .options button:active {
       background: #570657 !important;
       transform: scale(0.98);
@@ -170,26 +204,28 @@
       left: 0;
       width: 100%;
       text-align: center;
-      padding: 20px;
+      padding: 15px; /* Reduzido um pouco */
       font-family: 'Dancing Script', cursive;
-      font-size: 1.5em;
+      font-size: 1.3em; /* Reduzido um pouco */
       color: #b22222;
       background: #fff0f5;
       border-bottom: 10px solid #570657;
+      z-index: 999; /* Garante que fique sobre o conteúdo */
     }
 
     .oculto {
-      display: none;
+      display: none !important;
       opacity: 0;
-      transform: translateY(20px); /* Efeito de entrada */
+      transform: translateY(20px);
+      pointer-events: none;
     }
     
-    /* Classe para transição suave */
     .mostrando {
       display: block !important;
       opacity: 1;
       transform: translateY(0);
-      animation: apareceSuave 0.8s ease forwards; /* Animação de entrada */
+      animation: apareceSuave 0.8s ease forwards;
+      pointer-events: auto;
     }
     
     @keyframes apareceSuave {
@@ -203,15 +239,65 @@
       }
     }
     
+    /* ANIMAÇÃO DE CONFETES */
+    @keyframes confete {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    .confete {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #ff0000;
+      opacity: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    
+    .confete:nth-child(2n) { background: #00ff00; }
+    .confete:nth-child(3n) { background: #0000ff; }
+    .confete:nth-child(4n) { background: #ffff00; }
+    .confete:nth-child(5n) { background: #ff00ff; }
+    
+    /* CONTAINER PARA AS TELAS - CORRIGIDO PARA CENTRALIZAR */
+    #containerTelas {
+      position: relative;
+      width: 100%;
+      min-height: 550px; /* Aumentado para dar mais espaço */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-bottom: 40px; /* Espaço extra na parte de baixo */
+    }
+    
+    #telaInicial,
+    #quiz,
+    #telaVitoria {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      max-width: 600px;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      text-align: center;
+    }
+    
+    /* DIV DE ESPAÇAMENTO PARA A TELA DE VITÓRIA */
+    .espaco-rodape {
+      height: 100px;
+      display: block;
+      width: 100%;
+    }
+    
     /* ===== MEDIA QUERIES PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
       body {
-        padding-bottom: 120px;
+        padding-bottom: 160px; /* Aumentado para mobile */
       }
       
       footer {
         padding: 12px 8px;
-        font-size: 1.2em;
+        font-size: 1.1em; /* Reduzido para mobile */
         line-height: 1.3;
         box-sizing: border-box;
       }
@@ -232,36 +318,81 @@
         margin-bottom: 20px;
       }
       
-      /* SOLUÇÃO ESPECÍFICA PARA MOBILE - BOTÕES FICAREM ROXOS AO TOCAR */
-      /* Remove o hover problemático */
+      #containerTelas {
+        min-height: 500px; /* Aumentado para mobile */
+        padding: 0 10px;
+        padding-bottom: 60px; /* Mais espaço no mobile */
+      }
+      
+      #telaInicial,
+      #quiz,
+      #telaVitoria {
+        max-width: 100%;
+        padding: 0 10px;
+      }
+      
+      /* AJUSTE PARA MOBILE NA TELA DE VITÓRIA */
+      #telaVitoria .mensagem-inicial {
+        font-size: 1.05em; /* Um pouco menor no mobile */
+        margin-top: -20px;
+        padding: 12px;
+      }
+      
+      .botao-recompensa {
+        margin-bottom: 100px !important; /* MAIS ESPAÇO NO MOBILE */
+      }
+      
       @media (hover: none) and (pointer: coarse) {
         .options button:hover,
-        .botao-iniciar:hover {
+        .botao-iniciar:hover,
+        .botao-recompensa:hover {
           background: #b22222 !important;
           transform: none !important;
           box-shadow: none !important;
         }
+        
+        .botao-recompensa:hover {
+          background: #28a745 !important;
+        }
       }
       
-      /* FORÇA o efeito active funcionar melhor no mobile */
       .options button:active,
-      .botao-iniciar:active {
+      .botao-iniciar:active,
+      .botao-recompensa:active {
         background: #570657 !important;
         transform: scale(0.95) !important;
         transition: background-color 0.1s, transform 0.1s !important;
         box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
       }
+      
+      .botao-recompensa:active {
+        background: #1e7e34 !important;
+      }
     }
     
-    /* Ajustes para telas muito pequenas */
     @media only screen and (max-width: 375px) {
       .menu-fixo a {
         font-size: 24px;
       }
       
       footer {
-        font-size: 1.1em;
+        font-size: 1em; /* Reduzido para telas pequenas */
         padding: 10px 6px;
+      }
+      
+      #containerTelas {
+        min-height: 480px; /* Ajustado para telas pequenas */
+      }
+      
+      #telaVitoria .mensagem-inicial {
+        font-size: 1em; /* Ainda menor em telas muito pequenas */
+        margin-top: -15px;
+        padding: 10px;
+      }
+      
+      .botao-recompensa {
+        margin-bottom: 90px !important; /* Ajuste para telas muito pequenas */
+        padding: 13px 35px; /* Botão um pouco menor */
       }
     }
   </style>
@@ -273,36 +404,59 @@
     </ul>
   </nav>
 
-  <!-- TELA INICIAL -->
-  <div id="telaInicial" class="quiz-container tela-inicial">
-    <img src="QuisDoAmor4.png" 
-         alt="Quiz do Amor" 
-         style="max-width:300px; margin-bottom:2px; display:block; margin-left:auto; margin-right:auto;"> 
-    
-    <div class="mensagem-inicial">
-      <p>Oi, Dona Audrey,</p>
-      <p>Eu tenho umas perguntinhas para fazer pra senhorita e caso você acerte todas as perguntas, você irá ganhar o <strong>MAIOR presente de toda sua vida</strong>.</p>
-      <p>Então trate de acertar, hein! 😉</p>
-      <p>Caso esteja preparada, basta clicar no botão de iniciar.</p>
+  <!-- CONTAINER PARA AS TELAS - CENTRALIZADO -->
+  <div id="containerTelas">
+    <!-- TELA INICIAL -->
+    <div id="telaInicial" class="quiz-container tela-inicial mostrando">
+      <img src="QuisDoAmor4.png" 
+           alt="Quiz do Amor" 
+           style="max-width:300px; margin-bottom:2px; display:block; margin-left:auto; margin-right:auto;"> 
+      
+      <div class="mensagem-inicial">
+        <p>Oi, Dona Audrey,</p>
+        <p>Eu tenho umas perguntinhas para fazer pra senhorita e caso você acerte todas as perguntas, você irá ganhar o <strong>MAIOR presente de toda sua vida</strong>.</p>
+        <p>Então trate de acertar, hein! 😉</p>
+        <p>Caso esteja preparada, basta clicar no botão de iniciar.</p>
+      </div>
+      
+      <button id="iniciarQuiz" class="botao-iniciar">
+        INICIAR QUIZ 🎯
+      </button>
+      <div class="espaco-rodape"></div>
     </div>
-    
-    <button id="iniciarQuiz" class="botao-iniciar">
-      INICIAR QUIZ 🎯
-    </button>
-  </div>
 
-  <!-- QUIZ (inicialmente oculto) -->
-  <div id="quiz" class="quiz-container oculto">
-    <img src="QuisDoAmor4.png" 
-         alt="Quiz do Amor" 
-         style="max-width:300px; margin-bottom:2px; display:block; margin-left:auto; margin-right:auto;">
-  
-    <div class="progress-bar" style="margin-top:-50px;">
-      <div id="progress" class="progress"></div>
+    <!-- QUIZ (inicialmente oculto) -->
+    <div id="quiz" class="quiz-container oculto">
+      <img src="QuisDoAmor4.png" 
+           alt="Quiz do Amor" 
+           style="max-width:300px; margin-bottom:2px; display:block; margin-left:auto; margin-right:auto;">
+    
+      <div class="progress-bar" style="margin-top:-50px;">
+        <div id="progress" class="progress"></div>
+      </div>
+      <div id="questionBox"></div>
+      <div id="options" class="options"></div>
+      <div id="feedback" class="feedback"></div>
+      <div class="espaco-rodape"></div>
     </div>
-    <div id="questionBox"></div>
-    <div id="options" class="options"></div>
-    <div id="feedback" class="feedback"></div>
+
+    <!-- TELA DE VITÓRIA (inicialmente oculta) -->
+    <div id="telaVitoria" class="quiz-container tela-inicial oculto">
+      <img src="Vitoria.png" 
+           alt="Vitória do Quiz" 
+           style="max-width:300px; margin-bottom:31px; display:block; margin-left:auto; margin-right:auto;"> 
+      
+      <div class="mensagem-inicial">
+        <p>PARABÉNS, Dona Audrey! 🎉🏆</p>
+        <p>Você acertou todas as perguntas do <strong>NOSSO</strong> Quiz do Amor e, por isso, acaba de conquistar o direito de desbloquear o grande prêmio.</p>
+        <p><strong>Clique no botão abaixo para liberar sua recompensa e prepare-se para ser muito feliz ❤️</strong></p>
+      </div>
+      
+      <button id="pegarRecompensa" class="botao-recompensa">
+        PEGAR RECOMPENSA 🎁
+      </button>
+      <div class="espaco-rodape"></div>
+    </div>
   </div>
 
   <footer>
@@ -313,7 +467,9 @@
     // Elementos da tela
     const telaInicial = document.getElementById('telaInicial');
     const quiz = document.getElementById('quiz');
+    const telaVitoria = document.getElementById('telaVitoria');
     const iniciarQuizBtn = document.getElementById('iniciarQuiz');
+    const pegarRecompensaBtn = document.getElementById('pegarRecompensa');
     
     // Dados originais das perguntas
     const questionsData = [
@@ -327,6 +483,8 @@
     // Sons para feedback auditivo
     const soundAcerto = new Audio('acertou.mp3');
     const soundErro = new Audio('errou.mp3');
+    const soundVitoria = new Audio('VitoriaGame2.mp3');
+    const soundFinal = new Audio('vitoriaGame.mp3');
 
     // Função para embaralhar array
     function shuffleArray(array) {
@@ -366,70 +524,83 @@
     const feedbackBox = document.getElementById("feedback");
     const progressBar = document.getElementById("progress");
 
-    // ADICIONA EVENTOS TOUCH PARA O BOTÃO INICIAR QUIZ
-    function setupTouchEventsForButton(button) {
-      if ('ontouchstart' in window) {
-        button.addEventListener('touchstart', function() {
-          this.style.backgroundColor = '#570657';
-          this.style.transform = 'scale(0.95)';
-          this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
-        });
-        
-        button.addEventListener('touchend', function() {
-          setTimeout(() => {
-            this.style.backgroundColor = '#b22222';
-            this.style.transform = 'scale(1)';
-            this.style.boxShadow = '';
-          }, 200);
-        });
-        
-        button.addEventListener('touchcancel', function() {
-          this.style.backgroundColor = '#b22222';
-          this.style.transform = 'scale(1)';
-          this.style.boxShadow = '';
-        });
-      }
+    // FUNÇÃO SIMPLES PARA TROCAR TELAS
+    function trocarTela(esconder, mostrar) {
+      // Primeiro, esconde completamente a tela atual
+      esconder.classList.add('oculto');
+      esconder.classList.remove('mostrando');
+      
+      // Força um reflow para garantir que o navegador processe a mudança
+      void esconder.offsetWidth;
+      
+      // Agora mostra a nova tela
+      mostrar.classList.remove('oculto');
+      mostrar.classList.add('mostrando');
+      
+      // Scroll para o topo
+      window.scrollTo(0, 0);
     }
 
-    // Configura eventos touch para o botão iniciar
-    setupTouchEventsForButton(iniciarQuizBtn);
-
-    // Função para iniciar o quiz COM TRANSITION
+    // Função para iniciar o quiz
     function iniciarQuiz() {
-      // 1. Primeiro, adiciona efeito de saída na tela inicial
-      telaInicial.style.opacity = '0';
-      telaInicial.style.transform = 'translateY(-20px)';
+      // Prepara as perguntas
+      questions = prepareShuffledQuestions();
+      current = 0;
+      score = 0;
       
-      // 2. Espera 300ms para a transição de saída
+      // Toca som de início
+      try {
+        const inicioSound = new Audio('comecoGame.mp3');
+        inicioSound.currentTime = 0;
+        inicioSound.play();
+      } catch (e) {
+        console.log("Erro ao tocar som de início:", e);
+      }
+      
+      // Troca para tela do quiz
+      trocarTela(telaInicial, quiz);
+      
+      // Carrega a primeira pergunta
+      loadQuestion();
+    }
+
+    // FUNÇÃO PARA MOSTRAR TELA DE VITÓRIA
+    function mostrarTelaVitoria() {
+      // Toca som de vitória
+      try {
+        soundVitoria.currentTime = 0;
+        soundVitoria.play();
+      } catch (e) {
+        console.log("Erro ao tocar som de vitória:", e);
+      }
+      
+      // Troca para tela de vitória
+      trocarTela(quiz, telaVitoria);
+      
+      // Efeito de confetes
       setTimeout(() => {
-        // Esconde tela inicial
-        telaInicial.classList.add('oculto');
-        telaInicial.style.opacity = '';
-        telaInicial.style.transform = '';
-        
-        // 3. Remove classe oculto e adiciona classe de transição
-        quiz.classList.remove('oculto');
-        quiz.classList.add('mostrando');
-        
-        // Scroll para o topo
-        window.scrollTo(0, 0);
-        
-        // 4. Espera mais um pouco antes de carregar as perguntas
-        setTimeout(() => {
-          questions = prepareShuffledQuestions();
-          current = 0;
-          score = 0;
-          loadQuestion();
-          
-          try {
-            const inicioSound = new Audio('comecoGame.mp3');
-            inicioSound.currentTime = 0;
-            inicioSound.play();
-          } catch (e) {
-            console.log("Erro ao tocar som de início:", e);
-          }
-        }, 300);
+        criarConfetes();
       }, 300);
+    }
+
+    // FUNÇÃO PARA CRIAR CONFETES
+    function criarConfetes() {
+      const cores = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+      for (let i = 0; i < 50; i++) {
+        const confete = document.createElement('div');
+        confete.className = 'confete';
+        confete.style.left = Math.random() * 100 + 'vw';
+        confete.style.background = cores[Math.floor(Math.random() * cores.length)];
+        confete.style.animation = `confete ${Math.random() * 2 + 1}s ease forwards`;
+        confete.style.animationDelay = Math.random() * 0.5 + 's';
+        document.body.appendChild(confete);
+        
+        setTimeout(() => {
+          if (confete.parentNode) {
+            confete.remove();
+          }
+        }, 3000);
+      }
     }
 
     function loadQuestion() {
@@ -443,11 +614,7 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
-          // Configura eventos touch para os botões de opção
-          setupTouchEventsForButton(btn);
-          
           btn.onclick = function() {
-            // Força efeito visual de clique
             this.style.backgroundColor = '#570657';
             this.style.transform = 'scale(0.95)';
             this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
@@ -462,15 +629,17 @@
         
         updateProgress();
       } else {
-        if (score === questions.length) {
-          window.location.href = "perguntaPedidoNamoro.html";
-        } else {
-          setTimeout(() => {
+        setTimeout(() => {
+          if (score === questions.length) {
+            // ACERTOU TODAS - mostra tela de vitória
+            mostrarTelaVitoria();
+          } else {
+            // NÃO ACERTOU TODAS - mostra mensagem
             questionBox.innerHTML = "<p>Você precisa acertar todas as respostas para liberar a surpresa!❤️</p>";
             optionsBox.innerHTML = "<button onclick='restartQuiz()'>Tentar novamente</button>";
             feedbackBox.innerHTML = "";
-          }, 1000);
-        }
+          }
+        }, 1000);
       }
     }
 
@@ -506,11 +675,6 @@
     }
 
     function restartQuiz() {
-      const tryAgainBtn = document.querySelector('#options button');
-      if (tryAgainBtn) {
-        setupTouchEventsForButton(tryAgainBtn);
-      }
-      
       questions = prepareShuffledQuestions();
       current = 0;
       score = 0;
@@ -518,7 +682,28 @@
       loadQuestion();
     }
 
+    // EVENT LISTENERS
     iniciarQuizBtn.addEventListener('click', iniciarQuiz);
+    
+    pegarRecompensaBtn.addEventListener('click', function() {
+      // Desabilita o botão para evitar múltiplos cliques
+      this.disabled = true;
+      this.style.cursor = 'wait';
+      this.style.opacity = '0.7';
+      
+      // Toca som final
+      try {
+        soundFinal.currentTime = 0;
+        soundFinal.play();
+      } catch (e) {
+        console.log("Erro ao tocar som final:", e);
+      }
+      
+      // Espera 2-3 segundos antes de redirecionar
+      setTimeout(() => {
+        window.location.href = "perguntaPedidoNamoro.html";
+      }, 2500);
+    });
   </script>
 </body>
 </html>
