@@ -87,6 +87,7 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
+      -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3); /* Adicionado */
     }
 
     .botao-iniciar:hover {
@@ -95,9 +96,10 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
-    /* CORREÇÃO 1: BOTÃO FICAR ROXO QUANDO PRESSIONADO */
+    /* CORREÇÃO: BOTÃO FICAR ROXO QUANDO PRESSIONADO */
     .botao-iniciar:active {
       background: #570657 !important;
+      transform: scale(0.95) !important;
     }
 
     .question {
@@ -123,6 +125,7 @@
       min-height: 50px;
       text-align: center;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3);
     }
 
     .options button:hover {
@@ -130,9 +133,10 @@
       transform: scale(1.05);
     }
 
-    /* CORREÇÃO 1: BOTÕES FICAREM ROXOS QUANDO PRESSIONADOS */
+    /* CORREÇÃO: BOTÕES FICAREM ROXOS QUANDO PRESSIONADOS */
     .options button:active {
       background: #570657 !important;
+      transform: scale(0.98);
     }
 
     .feedback {
@@ -177,7 +181,7 @@
       display: none;
     }
     
-    /* ===== MEDIA QUERIES PARA MOBILE (APENAS CORREÇÕES ORIGINAIS) ===== */
+    /* ===== MEDIA QUERIES PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
       body {
         padding-bottom: 120px;
@@ -191,7 +195,7 @@
       }
       
       .quiz-container {
-        margin-top: 20px; /* RESTAURADO: mesmo valor do desktop */
+        margin-top: 20px;
         margin-left: 0;
         padding: 0 15px;
       }
@@ -206,12 +210,24 @@
         margin-bottom: 20px;
       }
       
-      /* Remove problema do hover persistente no mobile */
+      /* SOLUÇÃO ESPECÍFICA PARA MOBILE - BOTÕES FICAREM ROXOS AO TOCAR */
+      /* Remove o hover problemático */
       @media (hover: none) and (pointer: coarse) {
-        .options button:hover {
+        .options button:hover,
+        .botao-iniciar:hover {
           background: #b22222 !important;
           transform: none !important;
+          box-shadow: none !important;
         }
+      }
+      
+      /* FORÇA o efeito active funcionar melhor no mobile */
+      .options button:active,
+      .botao-iniciar:active {
+        background: #570657 !important;
+        transform: scale(0.95) !important;
+        transition: background-color 0.1s, transform 0.1s !important;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
       }
     }
     
@@ -328,6 +344,34 @@
     const feedbackBox = document.getElementById("feedback");
     const progressBar = document.getElementById("progress");
 
+    // ADICIONA EVENTOS TOUCH PARA O BOTÃO INICIAR QUIZ
+    function setupTouchEventsForButton(button) {
+      if ('ontouchstart' in window) {
+        button.addEventListener('touchstart', function() {
+          this.style.backgroundColor = '#570657';
+          this.style.transform = 'scale(0.95)';
+          this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
+        });
+        
+        button.addEventListener('touchend', function() {
+          setTimeout(() => {
+            this.style.backgroundColor = '#b22222';
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '';
+          }, 200);
+        });
+        
+        button.addEventListener('touchcancel', function() {
+          this.style.backgroundColor = '#b22222';
+          this.style.transform = 'scale(1)';
+          this.style.boxShadow = '';
+        });
+      }
+    }
+
+    // Configura eventos touch para o botão iniciar
+    setupTouchEventsForButton(iniciarQuizBtn);
+
     // Função para iniciar o quiz
     function iniciarQuiz() {
       telaInicial.classList.add('oculto');
@@ -358,8 +402,18 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
+          // Configura eventos touch para os botões de opção
+          setupTouchEventsForButton(btn);
+          
           btn.onclick = function() {
-            checkAnswer(i);
+            // Força efeito visual de clique
+            this.style.backgroundColor = '#570657';
+            this.style.transform = 'scale(0.95)';
+            this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
+            
+            setTimeout(() => {
+              checkAnswer(i);
+            }, 150);
           };
           
           optionsBox.appendChild(btn);
@@ -385,6 +439,9 @@
         btn.disabled = true;
         btn.style.cursor = 'not-allowed';
         btn.style.opacity = '0.7';
+        btn.style.backgroundColor = '#b22222';
+        btn.style.transform = 'scale(1)';
+        btn.style.boxShadow = '';
       });
       
       if (i === questions[current].answer) {
@@ -408,6 +465,11 @@
     }
 
     function restartQuiz() {
+      const tryAgainBtn = document.querySelector('#options button');
+      if (tryAgainBtn) {
+        setupTouchEventsForButton(tryAgainBtn);
+      }
+      
       questions = prepareShuffledQuestions();
       current = 0;
       score = 0;
