@@ -245,9 +245,16 @@ footer {
     box-sizing: border-box;
 }
 
-/* ESTILO PARA CLIQUE ATIVO (sem interferir no hover) */
+/* ESTILO PARA CLIQUE ATIVO */
 .btn.active-click {
     background-color: #570657 !important;
     transform: scale(0.95);
 }
 
+/* FORÇA EFEITO NO MOBILE TAMBÉM */
+@media (max-width: 768px) {
+    .btn:active {
+        background-color: #570657 !important;
+        transform: scale(0.92) !important;
+    }
+}

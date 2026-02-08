@@ -4,37 +4,51 @@ const btnYes = document.querySelector(".btn-yes");
 // GARANTE TAMANHO MÍNIMO DO BOTÃO NÃO
 btnNao.style.minWidth = "80px";
 
-// FUNÇÃO PARA FAZER BOTÃO FICAR ROXO AO CLICAR (SEM INTERFERIR NO HOVER)
+// VERIFICA SE É DISPOSITIVO MOBILE
+const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+// FUNÇÃO PARA FAZER BOTÃO FICAR ROXO AO CLICAR
 function makeButtonPurpleOnClick(button) {
-    // Para clique com mouse
-    button.addEventListener('mousedown', function() {
-        this.classList.add('active-click');
-    });
-    
-    button.addEventListener('mouseup', function() {
-        setTimeout(() => {
+    if (isMobile) {
+        // VERSÃO MOBILE - TOUCH
+        button.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.classList.add('active-click');
+            this.style.backgroundColor = '#570657';
+            this.style.transform = 'scale(0.92)';
+        });
+        
+        button.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            setTimeout(() => {
+                this.classList.remove('active-click');
+                this.style.backgroundColor = '';
+                this.style.transform = '';
+            }, 200);
+        });
+        
+        button.addEventListener('touchcancel', function(e) {
+            e.preventDefault();
             this.classList.remove('active-click');
-        }, 200);
-    });
-    
-    button.addEventListener('mouseleave', function() {
-        this.classList.remove('active-click');
-    });
-    
-    // Para touch (mobile)
-    button.addEventListener('touchstart', function() {
-        this.classList.add('active-click');
-    });
-    
-    button.addEventListener('touchend', function() {
-        setTimeout(() => {
+            this.style.backgroundColor = '';
+            this.style.transform = '';
+        });
+    } else {
+        // VERSÃO PC - MOUSE
+        button.addEventListener('mousedown', function() {
+            this.classList.add('active-click');
+        });
+        
+        button.addEventListener('mouseup', function() {
+            setTimeout(() => {
+                this.classList.remove('active-click');
+            }, 200);
+        });
+        
+        button.addEventListener('mouseleave', function() {
             this.classList.remove('active-click');
-        }, 200);
-    });
-    
-    button.addEventListener('touchcancel', function() {
-        this.classList.remove('active-click');
-    });
+        });
+    }
 }
 
 // Aplica efeito roxo ao botão Sim
