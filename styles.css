@@ -16,17 +16,21 @@ body {
     overflow: hidden;
 }
 
+/* IMAGEM - SEM MOLDURA E COM MESMO FUNDO DA P√ÅGINA */
 .image-container {
     width: 100%;
-    max-width: 300px;
+    max-width: 350px; /* AUMENTADO de 300px para 350px */
     margin-bottom: 2rem;
+    background: transparent; /* REMOVE qualquer fundo */
 }
 
 .responsive-image {
     width: 100%;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* REMOVIDO: border-radius: 10px; */
+    /* REMOVIDO: box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+    background: transparent; /* Garante que n√£o tenha fundo */
+    display: block;
 }
 
 .container {
@@ -72,7 +76,8 @@ body {
     }
 
     .image-container {
-        max-width: 250px;
+        max-width: 320px; /* AUMENTADO proporcionalmente */
+        margin-bottom: 1.5rem;
     }
 
     .container {
@@ -89,8 +94,8 @@ body {
 
 /* Ajustes adicionais para telas muito pequenas */
 @media (max-width: 320px) {
-    .responsive-image {
-        border-radius: 5px;
+    .image-container {
+        max-width: 280px; /* AUMENTADO proporcionalmente */
     }
 
     .btn {
@@ -98,6 +103,7 @@ body {
         font-size: 0.8rem;
     }
 }
+
 @keyframes vibrar {
     0% { transform: translateX(-2px); }
     25% { transform: translateX(2px); }
@@ -110,9 +116,10 @@ body {
     animation: vibrar 0.2s linear 3;
 }
 
-
-body { margin: 0; padding-top: 60px; /* Importante: espaÁo para o menu n„o cobrir o conte˙do */ }
-
+body { 
+    margin: 0; 
+    padding-top: 60px; /* Importante: espa√ßo para o menu n√£o cobrir o conte√∫do */
+}
 
 .menu-fixo {
     position: fixed;       /* fica fixo no topo */
@@ -122,48 +129,53 @@ body { margin: 0; padding-top: 60px; /* Importante: espaÁo para o menu n„o cobri
     background: #fff0f5;   /* cor rosa */
     padding: 5px 0;
     z-index: 10000;
-    /*border-bottom: 10px solid #570657;  borda na parte de baixo */
     border-top: 10px solid #570657;
     font-family: 'Dancing Script', cursive;
     font-size: 1.5em;
     color: #b22222;
-  }
+}
   
-  .menu-fixo ul {
+.menu-fixo ul {
     list-style: none;      /* remove bolinhas */
     margin: 0;
     padding: 0;
     display: flex;         /* coloca os itens lado a lado */
     justify-content: left; /* centraliza no meio */
-    gap: 60px;             /* espaÁo entre os Ìcones */
-  }
+    gap: 60px;             /* espa√ßo entre os √≠cones */
+}
   
-  .menu-fixo li {
+.menu-fixo li {
     display: inline-block;
-  }
+}
   
-  .menu-fixo a {
-    color: #b22222;;          /* cor dos Ìcones */
+.menu-fixo a {
+    color: #b22222;;          /* cor dos √≠cones */
     font-size: 35px;       /* tamanho grande para destacar */
     text-decoration: none;
     transition: transform 0.2s ease;
-  }
+}
   
-  .menu-fixo a:hover {
+.menu-fixo a:hover {
     transform: scale(1.3); /* efeito de zoom ao passar o mouse */
-  }
+}
 
+/* RODAP√â FIXO */
+footer {
+    position: fixed;   /* fixa no viewport */
+    bottom: 0;         /* cola no final da tela */
+    left: 0;
+    width: 100%;       /* ocupa toda a largura */
+    text-align: center;
+    padding: 20px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5em;
+    color: #b22222;
+    background: #fff0f5;
+    border-bottom: 10px solid #570657; /* borda na parte de baixo */
+}
 
-  
-
-
-
-  
-  
-
-  
-
-
-
-
-
+/* garante que o conte√∫do n√£o fique escondido atr√°s do rodap√© */
+body {
+    margin: 0;
+    padding-bottom: 80px; 
+}
