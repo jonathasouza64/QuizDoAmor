@@ -11,7 +11,7 @@
       background: #fff0f5;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-bottom: 80px;
+      padding-bottom: 150px;
     }
 
     .menu-fixo {
@@ -77,9 +77,24 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    /* APENAS ISSO FOI ADICIONADO - fonte menor na tela de vitória */
-    #telaVitoria .mensagem-inicial {
-      font-size: 1.15em;
+    /* CLASSE AJUSTADA: fonte menor para ocupar menos espaço */
+    .mensagem-vitoria {
+      font-size: 1.2em; /* REDUZI AQUI - estava 1.5em */
+      color: #570657;
+      line-height: 1.5; /* Reduzi um pouco o espaçamento entre linhas */
+      margin-top: -40px; /* Ajustei a margem superior */
+      margin-bottom: 20px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* AJUSTEI O DESTAQUE PARA O PRIMEIRO PARÁGRAFO */
+    .mensagem-vitoria p:first-child {
+      font-size: 1.4em; /* REDUZI - estava 1.8em */
+      font-weight: bold;
+      margin-bottom: 10px; /* Reduzi o espaçamento */
     }
 
     .botao-iniciar {
@@ -93,6 +108,7 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
+      margin-bottom: 20px;
       -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3);
     }
 
@@ -119,6 +135,7 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
+      margin-bottom: 80px !important;
       -webkit-tap-highlight-color: rgba(40, 167, 69, 0.3);
     }
     
@@ -199,12 +216,13 @@
       left: 0;
       width: 100%;
       text-align: center;
-      padding: 20px;
+      padding: 15px;
       font-family: 'Dancing Script', cursive;
-      font-size: 1.5em;
+      font-size: 1.3em;
       color: #b22222;
       background: #fff0f5;
       border-bottom: 10px solid #570657;
+      z-index: 999;
     }
 
     .oculto {
@@ -258,10 +276,11 @@
     #containerTelas {
       position: relative;
       width: 100%;
-      min-height: 500px;
+      min-height: 550px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      padding-bottom: 40px;
     }
     
     #telaInicial,
@@ -275,15 +294,22 @@
       text-align: center;
     }
     
+    /* DIV DE ESPAÇAMENTO PARA A TELA DE VITÓRIA */
+    .espaco-rodape {
+      height: 100px;
+      display: block;
+      width: 100%;
+    }
+    
     /* ===== MEDIA QUERIES PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
       body {
-        padding-bottom: 120px;
+        padding-bottom: 160px;
       }
       
       footer {
         padding: 12px 8px;
-        font-size: 1.2em;
+        font-size: 1.1em;
         line-height: 1.3;
         box-sizing: border-box;
       }
@@ -305,8 +331,9 @@
       }
       
       #containerTelas {
-        min-height: 400px;
+        min-height: 500px;
         padding: 0 10px;
+        padding-bottom: 60px;
       }
       
       #telaInicial,
@@ -316,9 +343,21 @@
         padding: 0 10px;
       }
       
-      /* APENAS ajuste da fonte na tela de vitória para mobile */
-      #telaVitoria .mensagem-inicial {
-        font-size: 1.1em;
+      .botao-recompensa {
+        margin-bottom: 100px !important;
+      }
+      
+      /* AJUSTES PARA A MENSAGEM DE VITÓRIA NO MOBILE */
+      .mensagem-vitoria {
+        font-size: 1.1em; /* REDUZI PARA MOBILE */
+        margin-top: -30px;
+        margin-bottom: 15px;
+        padding: 10px;
+      }
+      
+      .mensagem-vitoria p:first-child {
+        font-size: 1.3em; /* REDUZI PARA MOBILE */
+        margin-bottom: 10px;
       }
       
       @media (hover: none) and (pointer: coarse) {
@@ -355,17 +394,30 @@
       }
       
       footer {
-        font-size: 1.1em;
+        font-size: 1em;
         padding: 10px 6px;
       }
       
       #containerTelas {
-        min-height: 350px;
+        min-height: 480px;
       }
       
-      /* Ajuste menor para telas muito pequenas */
-      #telaVitoria .mensagem-inicial {
-        font-size: 1.05em;
+      .botao-recompensa {
+        margin-bottom: 90px !important;
+        padding: 13px 35px;
+      }
+      
+      /* AJUSTES PARA A MENSAGEM DE VITÓRIA EM TELAS PEQUENAS */
+      .mensagem-vitoria {
+        font-size: 1.0em; /* REDUZI AINDA MAIS PARA TELAS PEQUENAS */
+        margin-top: -20px;
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+      
+      .mensagem-vitoria p:first-child {
+        font-size: 1.2em; /* REDUZI PARA TELAS PEQUENAS */
+        margin-bottom: 8px;
       }
     }
   </style>
@@ -395,6 +447,7 @@
       <button id="iniciarQuiz" class="botao-iniciar">
         INICIAR QUIZ 🎯
       </button>
+      <div class="espaco-rodape"></div>
     </div>
 
     <!-- QUIZ (inicialmente oculto) -->
@@ -409,15 +462,17 @@
       <div id="questionBox"></div>
       <div id="options" class="options"></div>
       <div id="feedback" class="feedback"></div>
+      <div class="espaco-rodape"></div>
     </div>
 
     <!-- TELA DE VITÓRIA (inicialmente oculta) -->
     <div id="telaVitoria" class="quiz-container tela-inicial oculto">
       <img src="Vitoria.png" 
            alt="Vitória do Quiz" 
-           style="max-width:300px; margin-bottom:61px; display:block; margin-left:auto; margin-right:auto;"> 
+           style="max-width:300px; margin-bottom:40px; display:block; margin-left:auto; margin-right:auto;"> 
       
-      <div class="mensagem-inicial">
+      <!-- CLASSE ALTERADA: de "mensagem-inicial" para "mensagem-vitoria" -->
+      <div class="mensagem-vitoria">
         <p>PARABÉNS, Dona Audrey! 🎉🏆</p>
         <p>Você acertou todas as perguntas do <strong>NOSSO</strong> Quiz do Amor e, por isso, acaba de conquistar o direito de desbloquear o grande prêmio.</p>
         <p><strong>Clique no botão abaixo para liberar sua recompensa e prepare-se para ser muito feliz ❤️</strong></p>
@@ -426,6 +481,7 @@
       <button id="pegarRecompensa" class="botao-recompensa">
         PEGAR RECOMPENSA 🎁
       </button>
+      <div class="espaco-rodape"></div>
     </div>
   </div>
 
@@ -494,63 +550,25 @@
     const feedbackBox = document.getElementById("feedback");
     const progressBar = document.getElementById("progress");
 
-    // ADICIONA EVENTOS TOUCH PARA BOTÕES
-    function setupTouchEventsForButton(button, isGreen = false) {
-      if ('ontouchstart' in window) {
-        const originalColor = isGreen ? '#28a745' : '#b22222';
-        const activeColor = isGreen ? '#1e7e34' : '#570657';
-        
-        button.addEventListener('touchstart', function() {
-          this.style.backgroundColor = activeColor;
-          this.style.transform = 'scale(0.95)';
-          this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
-        });
-        
-        button.addEventListener('touchend', function() {
-          setTimeout(() => {
-            this.style.backgroundColor = originalColor;
-            this.style.transform = 'scale(1)';
-            this.style.boxShadow = '';
-          }, 200);
-        });
-        
-        button.addEventListener('touchcancel', function() {
-          this.style.backgroundColor = originalColor;
-          this.style.transform = 'scale(1)';
-          this.style.boxShadow = '';
-        });
-      }
-    }
-
-    // Configura eventos touch para os botões
-    setupTouchEventsForButton(iniciarQuizBtn);
-    setupTouchEventsForButton(pegarRecompensaBtn, true);
-
     // FUNÇÃO SIMPLES PARA TROCAR TELAS
     function trocarTela(esconder, mostrar) {
-      // Primeiro, esconde completamente a tela atual
       esconder.classList.add('oculto');
       esconder.classList.remove('mostrando');
       
-      // Força um reflow para garantir que o navegador processe a mudança
       void esconder.offsetWidth;
       
-      // Agora mostra a nova tela
       mostrar.classList.remove('oculto');
       mostrar.classList.add('mostrando');
       
-      // Scroll para o topo
       window.scrollTo(0, 0);
     }
 
     // Função para iniciar o quiz
     function iniciarQuiz() {
-      // Prepara as perguntas
       questions = prepareShuffledQuestions();
       current = 0;
       score = 0;
       
-      // Toca som de início
       try {
         const inicioSound = new Audio('comecoGame.mp3');
         inicioSound.currentTime = 0;
@@ -559,16 +577,12 @@
         console.log("Erro ao tocar som de início:", e);
       }
       
-      // Troca para tela do quiz
       trocarTela(telaInicial, quiz);
-      
-      // Carrega a primeira pergunta
       loadQuestion();
     }
 
     // FUNÇÃO PARA MOSTRAR TELA DE VITÓRIA
     function mostrarTelaVitoria() {
-      // Toca som de vitória
       try {
         soundVitoria.currentTime = 0;
         soundVitoria.play();
@@ -576,10 +590,8 @@
         console.log("Erro ao tocar som de vitória:", e);
       }
       
-      // Troca para tela de vitória
       trocarTela(quiz, telaVitoria);
       
-      // Efeito de confetes
       setTimeout(() => {
         criarConfetes();
       }, 300);
@@ -616,8 +628,6 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
-          setupTouchEventsForButton(btn);
-          
           btn.onclick = function() {
             this.style.backgroundColor = '#570657';
             this.style.transform = 'scale(0.95)';
@@ -635,10 +645,8 @@
       } else {
         setTimeout(() => {
           if (score === questions.length) {
-            // ACERTOU TODAS - mostra tela de vitória
             mostrarTelaVitoria();
           } else {
-            // NÃO ACERTOU TODAS - mostra mensagem
             questionBox.innerHTML = "<p>Você precisa acertar todas as respostas para liberar a surpresa!❤️</p>";
             optionsBox.innerHTML = "<button onclick='restartQuiz()'>Tentar novamente</button>";
             feedbackBox.innerHTML = "";
@@ -690,12 +698,10 @@
     iniciarQuizBtn.addEventListener('click', iniciarQuiz);
     
     pegarRecompensaBtn.addEventListener('click', function() {
-      // Desabilita o botão para evitar múltiplos cliques
       this.disabled = true;
       this.style.cursor = 'wait';
       this.style.opacity = '0.7';
       
-      // Toca som final
       try {
         soundFinal.currentTime = 0;
         soundFinal.play();
@@ -703,7 +709,6 @@
         console.log("Erro ao tocar som final:", e);
       }
       
-      // Espera 2-3 segundos antes de redirecionar
       setTimeout(() => {
         window.location.href = "perguntaPedidoNamoro.html";
       }, 2500);
