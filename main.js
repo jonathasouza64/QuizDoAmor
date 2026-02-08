@@ -4,6 +4,42 @@ const btnYes = document.querySelector(".btn-yes");
 // GARANTE TAMANHO MÍNIMO DO BOTÃO NÃO
 btnNao.style.minWidth = "80px";
 
+// FUNÇÃO PARA FAZER BOTÃO FICAR ROXO AO CLICAR (SEM INTERFERIR NO HOVER)
+function makeButtonPurpleOnClick(button) {
+    // Para clique com mouse
+    button.addEventListener('mousedown', function() {
+        this.classList.add('active-click');
+    });
+    
+    button.addEventListener('mouseup', function() {
+        setTimeout(() => {
+            this.classList.remove('active-click');
+        }, 200);
+    });
+    
+    button.addEventListener('mouseleave', function() {
+        this.classList.remove('active-click');
+    });
+    
+    // Para touch (mobile)
+    button.addEventListener('touchstart', function() {
+        this.classList.add('active-click');
+    });
+    
+    button.addEventListener('touchend', function() {
+        setTimeout(() => {
+            this.classList.remove('active-click');
+        }, 200);
+    });
+    
+    button.addEventListener('touchcancel', function() {
+        this.classList.remove('active-click');
+    });
+}
+
+// Aplica efeito roxo ao botão Sim
+makeButtonPurpleOnClick(btnYes);
+
 // Redireciona para a próxima página ao clicar em "Sim"
 btnYes.addEventListener("click", function () {
     const nextPage = "corpo.html"; // Caminho da nova página
@@ -82,3 +118,6 @@ window.addEventListener('resize', function() {
 if (window.innerWidth <= 768) {
     btnNao.style.minWidth = "70px";
 }
+
+// Aplica efeito roxo ao botão Não também (opcional)
+makeButtonPurpleOnClick(btnNao);
