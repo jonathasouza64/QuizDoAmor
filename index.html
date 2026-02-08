@@ -11,7 +11,7 @@
       background: #fff0f5;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-bottom: 150px; /* AUMENTADO para dar mais espaço para o rodapé */
+      padding-bottom: 80px;
     }
 
     .menu-fixo {
@@ -77,12 +77,9 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    /* MENSAGEM ESPECÍFICA PARA TELA DE VITÓRIA - FONTE MENOR */
+    /* APENAS ISSO FOI ADICIONADO - fonte menor na tela de vitória */
     #telaVitoria .mensagem-inicial {
-      font-size: 1.15em; /* Reduzido de 1.3em para 1.15em */
-      line-height: 1.5;
-      margin-top: -30px; /* Ajustado para compensar a fonte menor */
-      margin-bottom: 20px;
+      font-size: 1.15em;
     }
 
     .botao-iniciar {
@@ -96,7 +93,6 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
-      margin-bottom: 20px; /* Adicionado espaço abaixo */
       -webkit-tap-highlight-color: rgba(87, 6, 87, 0.3);
     }
 
@@ -123,7 +119,6 @@
       transition: all 0.3s ease;
       font-family: 'Dancing Script', cursive;
       font-weight: bold;
-      margin-bottom: 80px !important; /* ESPAÇO EXTRA PARA NÃO FICAR NO RODAPÉ */
       -webkit-tap-highlight-color: rgba(40, 167, 69, 0.3);
     }
     
@@ -204,13 +199,12 @@
       left: 0;
       width: 100%;
       text-align: center;
-      padding: 15px; /* Reduzido um pouco */
+      padding: 20px;
       font-family: 'Dancing Script', cursive;
-      font-size: 1.3em; /* Reduzido um pouco */
+      font-size: 1.5em;
       color: #b22222;
       background: #fff0f5;
       border-bottom: 10px solid #570657;
-      z-index: 999; /* Garante que fique sobre o conteúdo */
     }
 
     .oculto {
@@ -264,11 +258,10 @@
     #containerTelas {
       position: relative;
       width: 100%;
-      min-height: 550px; /* Aumentado para dar mais espaço */
+      min-height: 500px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding-bottom: 40px; /* Espaço extra na parte de baixo */
     }
     
     #telaInicial,
@@ -282,22 +275,15 @@
       text-align: center;
     }
     
-    /* DIV DE ESPAÇAMENTO PARA A TELA DE VITÓRIA */
-    .espaco-rodape {
-      height: 100px;
-      display: block;
-      width: 100%;
-    }
-    
     /* ===== MEDIA QUERIES PARA MOBILE ===== */
     @media only screen and (max-width: 768px) {
       body {
-        padding-bottom: 160px; /* Aumentado para mobile */
+        padding-bottom: 120px;
       }
       
       footer {
         padding: 12px 8px;
-        font-size: 1.1em; /* Reduzido para mobile */
+        font-size: 1.2em;
         line-height: 1.3;
         box-sizing: border-box;
       }
@@ -319,9 +305,8 @@
       }
       
       #containerTelas {
-        min-height: 500px; /* Aumentado para mobile */
+        min-height: 400px;
         padding: 0 10px;
-        padding-bottom: 60px; /* Mais espaço no mobile */
       }
       
       #telaInicial,
@@ -331,15 +316,9 @@
         padding: 0 10px;
       }
       
-      /* AJUSTE PARA MOBILE NA TELA DE VITÓRIA */
+      /* APENAS ajuste da fonte na tela de vitória para mobile */
       #telaVitoria .mensagem-inicial {
-        font-size: 1.05em; /* Um pouco menor no mobile */
-        margin-top: -20px;
-        padding: 12px;
-      }
-      
-      .botao-recompensa {
-        margin-bottom: 100px !important; /* MAIS ESPAÇO NO MOBILE */
+        font-size: 1.1em;
       }
       
       @media (hover: none) and (pointer: coarse) {
@@ -376,23 +355,17 @@
       }
       
       footer {
-        font-size: 1em; /* Reduzido para telas pequenas */
+        font-size: 1.1em;
         padding: 10px 6px;
       }
       
       #containerTelas {
-        min-height: 480px; /* Ajustado para telas pequenas */
+        min-height: 350px;
       }
       
+      /* Ajuste menor para telas muito pequenas */
       #telaVitoria .mensagem-inicial {
-        font-size: 1em; /* Ainda menor em telas muito pequenas */
-        margin-top: -15px;
-        padding: 10px;
-      }
-      
-      .botao-recompensa {
-        margin-bottom: 90px !important; /* Ajuste para telas muito pequenas */
-        padding: 13px 35px; /* Botão um pouco menor */
+        font-size: 1.05em;
       }
     }
   </style>
@@ -422,7 +395,6 @@
       <button id="iniciarQuiz" class="botao-iniciar">
         INICIAR QUIZ 🎯
       </button>
-      <div class="espaco-rodape"></div>
     </div>
 
     <!-- QUIZ (inicialmente oculto) -->
@@ -437,14 +409,13 @@
       <div id="questionBox"></div>
       <div id="options" class="options"></div>
       <div id="feedback" class="feedback"></div>
-      <div class="espaco-rodape"></div>
     </div>
 
     <!-- TELA DE VITÓRIA (inicialmente oculta) -->
     <div id="telaVitoria" class="quiz-container tela-inicial oculto">
       <img src="Vitoria.png" 
            alt="Vitória do Quiz" 
-           style="max-width:300px; margin-bottom:31px; display:block; margin-left:auto; margin-right:auto;"> 
+           style="max-width:300px; margin-bottom:61px; display:block; margin-left:auto; margin-right:auto;"> 
       
       <div class="mensagem-inicial">
         <p>PARABÉNS, Dona Audrey! 🎉🏆</p>
@@ -455,7 +426,6 @@
       <button id="pegarRecompensa" class="botao-recompensa">
         PEGAR RECOMPENSA 🎁
       </button>
-      <div class="espaco-rodape"></div>
     </div>
   </div>
 
@@ -523,6 +493,38 @@
     const optionsBox = document.getElementById("options");
     const feedbackBox = document.getElementById("feedback");
     const progressBar = document.getElementById("progress");
+
+    // ADICIONA EVENTOS TOUCH PARA BOTÕES
+    function setupTouchEventsForButton(button, isGreen = false) {
+      if ('ontouchstart' in window) {
+        const originalColor = isGreen ? '#28a745' : '#b22222';
+        const activeColor = isGreen ? '#1e7e34' : '#570657';
+        
+        button.addEventListener('touchstart', function() {
+          this.style.backgroundColor = activeColor;
+          this.style.transform = 'scale(0.95)';
+          this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
+        });
+        
+        button.addEventListener('touchend', function() {
+          setTimeout(() => {
+            this.style.backgroundColor = originalColor;
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '';
+          }, 200);
+        });
+        
+        button.addEventListener('touchcancel', function() {
+          this.style.backgroundColor = originalColor;
+          this.style.transform = 'scale(1)';
+          this.style.boxShadow = '';
+        });
+      }
+    }
+
+    // Configura eventos touch para os botões
+    setupTouchEventsForButton(iniciarQuizBtn);
+    setupTouchEventsForButton(pegarRecompensaBtn, true);
 
     // FUNÇÃO SIMPLES PARA TROCAR TELAS
     function trocarTela(esconder, mostrar) {
@@ -613,6 +615,8 @@
         questions[current].options.forEach((opt, i) => {
           const btn = document.createElement("button");
           btn.innerText = opt;
+          
+          setupTouchEventsForButton(btn);
           
           btn.onclick = function() {
             this.style.backgroundColor = '#570657';
