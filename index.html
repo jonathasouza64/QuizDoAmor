@@ -189,7 +189,7 @@
       display: block !important;
       opacity: 1;
       transform: translateY(0);
-      animation: apareceSuave 0.8s ease forwards; /* Animação de entrada */
+      animation: apareceSuave 3.0s ease forwards; /* Animação de entrada */
     }
     
     @keyframes apareceSuave {
@@ -422,7 +422,7 @@
           loadQuestion();
           
           try {
-            const inicioSound = new Audio('acertou.mp3');
+            const inicioSound = new Audio('comecoGame.mp3');
             inicioSound.currentTime = 0;
             inicioSound.play();
           } catch (e) {
