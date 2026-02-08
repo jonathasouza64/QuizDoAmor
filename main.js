@@ -1,6 +1,9 @@
 const btnNao = document.querySelector(".btn-nao");
 const btnYes = document.querySelector(".btn-yes");
 
+// GARANTE TAMANHO MÍNIMO DO BOTÃO NÃO
+btnNao.style.minWidth = "80px";
+
 // Redireciona para a próxima página ao clicar em "Sim"
 btnYes.addEventListener("click", function () {
     const nextPage = "corpo.html"; // Caminho da nova página
@@ -28,6 +31,9 @@ function moveButton() {
     btnNao.style.position = "absolute";
     btnNao.style.top = `${newTop}px`;
     btnNao.style.left = `${newLeft}px`;
+    
+    // GARANTE QUE O BOTÃO MANTENHA O TAMANHO MÍNIMO MESMO QUANDO MOVIDO
+    btnNao.style.minWidth = "80px";
 
     // Adiciona o efeito de vibração ao botão "Sim"
     btnYes.classList.add("btn-vibrate");
@@ -63,4 +69,16 @@ btnNao.addEventListener("touchstart", function () {
 // Movimentação automática do botão "Não" em intervalos
 setInterval(moveButton, 1500);
 
+// AJUSTA TAMANHO MÍNIMO PARA MOBILE
+window.addEventListener('resize', function() {
+    if (window.innerWidth <= 768) {
+        btnNao.style.minWidth = "70px";
+    } else {
+        btnNao.style.minWidth = "80px";
+    }
+});
 
+// INICIALIZA COM O TAMANHO CORRETO
+if (window.innerWidth <= 768) {
+    btnNao.style.minWidth = "70px";
+}
