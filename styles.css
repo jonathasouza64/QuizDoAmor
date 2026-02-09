@@ -22,8 +22,8 @@ body {
 .image-container {
     width: 100%;
     max-width: 400px;
-    margin-bottom: 1rem;
-    margin-top: 0; /* Zero margem */
+    margin-bottom: -21px;
+    margin-top: -35px; /* Zero margem */
     background: transparent;
     position: relative;
     top: -15px; /* Move a imagem para cima */
@@ -41,7 +41,7 @@ body {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    max-width: 400px;
+    max-width: 415px;
     margin-top: 0.5rem;
 }
 
@@ -64,7 +64,7 @@ body {
 /* BOTÃO SIM EXPANDIDO PARA MESMA LARGURA DA IMAGEM */
 .btn-yes {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     margin-right: 0;
 }
 
@@ -101,7 +101,7 @@ body {
     /* IMAGEM AINDA MAIS PRÓXIMA NO MOBILE */
     .image-container {
         max-width: 350px;
-        margin-bottom: 0.8rem;
+        margin-bottom: -39px;
         margin-top: 0;
         top: -20px; /* MAIS para cima no mobile */
     }
@@ -126,9 +126,10 @@ body {
     
     /* BOTÃO SIM OCUPA MAIS ESPAÇO NO MOBILE */
     .btn-yes {
-        max-width: 350px;
+        max-width: 355px;
         flex: 2;
         margin-right: 0.5rem;
+        
     }
     
     .btn-nao {
@@ -151,7 +152,8 @@ body {
     
     .image-container {
         max-width: 300px;
-        top: -25px; /* AINDA MAIS para cima */
+        top: -35px; /* AINDA MAIS para cima */
+        
     }
     
     .container {
@@ -164,7 +166,7 @@ body {
     }
     
     .btn-yes {
-        max-width: 300px;
+        max-width: 355px;
     }
     
     .btn-nao {
