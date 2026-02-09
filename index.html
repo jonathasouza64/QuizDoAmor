@@ -596,6 +596,30 @@
         font-size: 1.0em;
       }
     }
+
+     /* CLASSE TEMPORÁRIA PARA BOTÕES PRESSIONADOS */
+     .botao-iniciar.pressionado,
+    .options button.pressionado {
+      background: #570657 !important;
+      transform: scale(0.95) !important;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
+    }
+    
+    /* GARANTIR QUE O :active FUNCIONE NO MOBILE */
+    @media (hover: none) and (pointer: coarse) {
+      .options button:active,
+      .botao-iniciar:active,
+      .botao-recompensa:active {
+        background: #570657 !important;
+        transform: scale(0.95) !important;
+        transition: background-color 0.1s, transform 0.1s !important;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
+      }
+      
+      .botao-recompensa:active {
+        background: #1e7e34 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -649,7 +673,7 @@
       
       <!-- CLASSE ALTERADA: de "mensagem-inicial" para "mensagem-vitoria" -->
       <div class="mensagem-vitoria">
-        <p>PARABÉNS, Dona Audrey! 🎉🏆</p>
+        <p>PARABÉNS, Dona Audrey!🎉🏆</p>
         <p>Você acertou todas as perguntas do <strong>NOSSO</strong> Quiz do Amor e, por isso, acaba de conquistar o direito de desbloquear o grande prêmio.</p>
         <p><strong>Clique no botão abaixo para liberar sua recompensa e prepare-se para ser muito feliz ❤️</strong></p>
       </div>
@@ -804,14 +828,27 @@
           const btn = document.createElement("button");
           btn.innerText = opt;
           
+          // CORREÇÃO AQUI: Remover estilos inline para permitir que o CSS funcione
           btn.onclick = function() {
+            // Apenas adicionar classe temporária para efeito visual
+            this.classList.add('pressionado');
             this.style.backgroundColor = '#570657';
             this.style.transform = 'scale(0.95)';
             this.style.boxShadow = '0 3px 6px rgba(0,0,0,0.2)';
             
             setTimeout(() => {
               checkAnswer(i);
+              // Remover classe após a ação
+              this.classList.remove('pressionado');
             }, 150);
+          };
+          
+          // Garantir que o botão volte ao estado normal quando não estiver pressionado
+          btn.onmouseup = btn.ontouchend = function() {
+            this.style.backgroundColor = '';
+            this.style.transform = '';
+            this.style.boxShadow = '';
+            this.classList.remove('pressionado');
           };
           
           optionsBox.appendChild(btn);
@@ -837,7 +874,8 @@
         btn.disabled = true;
         btn.style.cursor = 'not-allowed';
         btn.style.opacity = '0.7';
-        btn.style.backgroundColor = '#b22222';
+        // IMPORTANTE: Não definir backgroundColor aqui para permitir que o CSS :active funcione
+        // btn.style.backgroundColor = '#b22222';
         btn.style.transform = 'scale(1)';
         btn.style.boxShadow = '';
       });
@@ -870,8 +908,35 @@
       loadQuestion();
     }
 
-    // EVENT LISTENERS
-    iniciarQuizBtn.addEventListener('click', iniciarQuiz);
+    // EVENT LISTENERS - CORREÇÃO PARA O BOTÃO INICIAR QUIZ
+    iniciarQuizBtn.addEventListener('click', function(e) {
+      // Adicionar efeito visual de pressionado
+      this.classList.add('pressionado');
+      this.style.backgroundColor = '#570657';
+      this.style.transform = 'scale(0.95)';
+      
+      // Chamar a função iniciarQuiz após um breve delay
+      setTimeout(() => {
+        iniciarQuiz();
+        // Remover efeito visual
+        this.classList.remove('pressionado');
+        this.style.backgroundColor = '';
+        this.style.transform = '';
+      }, 150);
+    });
+    
+    // Event listener para quando o usuário soltar o botão (touch/mouse)
+    iniciarQuizBtn.addEventListener('mouseup', function() {
+      this.style.backgroundColor = '';
+      this.style.transform = '';
+      this.classList.remove('pressionado');
+    });
+    
+    iniciarQuizBtn.addEventListener('touchend', function() {
+      this.style.backgroundColor = '';
+      this.style.transform = '';
+      this.classList.remove('pressionado');
+    });
     
     pegarRecompensaBtn.addEventListener('click', function() {
       this.disabled = true;
