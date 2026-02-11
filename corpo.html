@@ -18,7 +18,7 @@
       background: linear-gradient(to bottom, #fff0f5, #fff0f5);
     }
 
-    /* MENU FIXO */
+    /* MENU FIXO - EXATAMENTE COMO ESTAVA NO SEU CÓDIGO ORIGINAL */
     .menu-fixo {
       position: fixed;
       top: 0;
@@ -38,7 +38,7 @@
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: left;
+      justify-content: left; /* ALINHADO À ESQUERDA */
       gap: 60px;
     }
 
@@ -57,6 +57,30 @@
       transform: scale(1.3);
     }
 
+    /* Ajustes de responsividade ORIGINAIS DO SEU CÓDIGO */
+    @media (max-width: 768px) {
+      .menu-fixo ul {
+        gap: 20px;
+        justify-content: left; /* MANTÉM ALINHADO À ESQUERDA */
+      }
+
+      .menu-fixo a {
+        font-size: 35px; /* TAMANHO ORIGINAL */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .menu-fixo ul {
+        flex-direction: column;
+        align-items: left; /* ALINHADO À ESQUERDA */
+        gap: 10px;
+      }
+
+      .menu-fixo a {
+        font-size: 35px; /* TAMANHO ORIGINAL */
+      }
+    }
+
     /* TEXTO PRINCIPAL */
     .intro-text {
       background: rgb(255, 253, 253);
@@ -72,7 +96,7 @@
     }
 
     .intro-text h1 {
-      color: #570657; /* CORRIGIDO: Mantém a cor vermelha original */
+      color: #570657;
       text-align: center;
       font-family: 'Dancing Script', cursive;
       font-size: 2.5em;
@@ -157,7 +181,7 @@
       background: #570657;
     }
 
-    /* RODAPÉ FIXO */
+    /* RODAPÉ FIXO - CENTRALIZADO */
     footer {
       position: fixed;
       bottom: 0;
@@ -170,23 +194,17 @@
       color: #b22222;
       background: #fff0f5;
       border-bottom: 10px solid #570657;
+      /* Adicionando para garantir centralização perfeita */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     /* =========================================== */
-    /* AJUSTES PARA CELULAR (até 768px) */
+    /* APENAS OS AJUSTES NECESSÁRIOS PARA MOBILE */
     /* =========================================== */
     
     @media (max-width: 768px) {
-      /* Ajuste do menu para mobile */
-      .menu-fixo ul {
-        gap: 20px;
-        justify-content: center;
-      }
-
-      .menu-fixo a {
-        font-size: 28px;
-      }
-
       /* Ajuste do texto principal para mobile */
       .intro-text {
         padding: 15px;
@@ -199,46 +217,32 @@
         text-align: center;
       }
 
-      /* AJUSTE DO CARROSSEL PARA MOBILE - CORRIGIDO */
+      /* AJUSTE DO CARROSSEL PARA MOBILE - MANTENDO O QUE FUNCIONOU */
       .splide {
         width: 95%;
         margin: 20px auto;
-        height: auto !important; /* Remove altura fixa */
+        height: auto !important;
       }
       
       .splide__slide {
-        height: 500px; /* Altura fixa para o slide no mobile */
+        height: 500px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #fff0f5; /* Fundo para caso a imagem seja menor */
+        background-color: #fff0f5;
       }
       
       .splide__slide img {
-        height: 100%; /* Ocupa 100% da altura do slide */
-        width: auto; /* Largura automática mantém proporção */
-        max-width: 100%; /* Não ultrapassa a largura do container */
-        object-fit: contain; /* Mostra imagem inteira sem cortar */
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
         border-radius: 10px;
-      }
-
-      /* Ajuste do rodapé para mobile */
-      footer {
-        font-size: 1.2em;
-        padding: 15px;
       }
     }
 
     /* Para telas muito pequenas (até 480px) */
     @media (max-width: 480px) {
-      .menu-fixo ul {
-        gap: 10px;
-      }
-
-      .menu-fixo a {
-        font-size: 24px;
-      }
-
       .intro-text h1 {
         font-size: 1.6em;  /* Tamanho ainda menor para telas pequenas */
       }
@@ -246,18 +250,13 @@
       .splide__slide {
         height: 400px;  /* Altura menor para telas pequenas */
       }
-
-      footer {
-        font-size: 1em;
-        padding: 10px;
-      }
     }
 
   </style>
 </head>
 <body>
 
-  <!-- MENU FIXO -->
+  <!-- MENU FIXO - EXATAMENTE COMO ESTAVA NO SEU CÓDIGO ORIGINAL -->
   <nav class="menu-fixo">
     <ul>
       <li><a href="#">💌Jonathan & Audrey</a></li>
@@ -311,8 +310,9 @@
   <br>
   <br>
 
+  <!-- RODAPÉ - AGORA PERFEITAMENTE CENTRALIZADO -->
   <footer>
-    O começo de uma grande história❤️
+   
   </footer>
 
   <!-- POPUP -->
@@ -335,7 +335,7 @@
 
     playButton.addEventListener('click', () => {
       backgroundMusic.play();
-      popup.style.display = 'none'; // Esconde o popup
+      popup.style.display = 'none';
     });
   </script>
 
@@ -354,12 +354,12 @@
       breakpoints: {
         768: { 
           perPage: 1, 
-          height: '500px', // Altura fixa para mobile
+          height: '500px',
           gap: '10px'
         },
         480: {
           perPage: 1,
-          height: '400px', // Altura menor para telas pequenas
+          height: '400px',
           gap: '5px'
         }
       },
