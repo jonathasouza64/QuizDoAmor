@@ -9,8 +9,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/css/splide.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   
-
-
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -20,70 +18,44 @@
       background: linear-gradient(to bottom, #fff0f5, #fff0f5);
     }
 
-    
+    /* MENU FIXO */
+    .menu-fixo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff0f5;
+      padding: 5px 0;
+      z-index: 10000;
+      border-top: 10px solid #570657;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5em;
+      color: #b22222;
+    }
 
-    /* Seu código atual */
-.menu-fixo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #fff0f5;
-  padding: 5px 0;
-  z-index: 10000;
-  border-top: 10px solid #570657;
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.5em;
-  color: #b22222;
-}
+    .menu-fixo ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: left;
+      gap: 60px;
+    }
 
-.menu-fixo ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: left;
-  gap: 60px;
-}
+    .menu-fixo li {
+      display: inline-block;
+    }
 
-.menu-fixo li {
-  display: inline-block;
-}
+    .menu-fixo a {
+      color: #b22222;
+      font-size: 35px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
 
-.menu-fixo a {
-  color: #b22222;
-  font-size: 35px;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.menu-fixo a:hover {
-  transform: scale(1.3);
-}
-
-/* Ajustes de responsividade */
-@media (max-width: 768px) {
-  .menu-fixo ul {
-    gap: 20px;
-    justify-content: left;
-  }
-
-  .menu-fixo a {
-    font-size: 35px;
-  }
-}
-
-@media (max-width: 480px) {
-  .menu-fixo ul {
-    flex-direction: column;
-    align-items: left;
-    gap: 10px;
-  }
-
-  .menu-fixo a {
-    font-size: 35px;
-  }
-}
+    .menu-fixo a:hover {
+      transform: scale(1.3);
+    }
 
     /* TEXTO PRINCIPAL */
     .intro-text {
@@ -95,23 +67,25 @@
       color: #8b0000;
       text-align: justify;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin: 130px auto 40px auto; /* afasta do menu fixo */
+      margin: 130px auto 40px auto;
       margin-top: 100px;
     }
 
     .intro-text h1 {
-      color: #4e0863f1;
+      color: #570657; /* CORRIGIDO: Mantém a cor vermelha original */
       text-align: center;
-      font-family: 'Dancing Script',
+      font-family: 'Dancing Script', cursive;
       font-size: 2.5em;
+      animation: fadeIn 2s ease;
     }
 
     .intro-text p {
       margin: 10px 0;
       line-height: 1.6;
+      animation: fadeIn 2.5s ease;
     }
 
-    /* CARROSSEL SPLIDE */
+    /* CARROSSEL SPLIDE - VERSÃO DESKTOP */
     .splide {
       width: 80%;
       max-width: 900px;
@@ -120,6 +94,8 @@
 
     .splide__slide img {
       width: 100%;
+      height: 2200px;
+      object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
@@ -135,92 +111,147 @@
       background: #fff0f5;
     }
 
+    /* Animação suave de entrada */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    .splide__slide img {
-  width: 100%;
-  height: 2200px;   /* aumenta a altura */
-  object-fit: cover; /* mantÃ©m proporÃ§Ã£o sem distorcer */
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+    /* POPUP */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-  /* AnimaÃ§Ã£o suave de entrada */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    .popup-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  /* Aplicando fonte romÃ¢ntica no tÃ­tulo */
-  .intro-text h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.4em;
-    color: #b22222;
-    animation: fadeIn 2s ease;
-    text-align: left;
-  }
+    .popup-content button {
+      padding: 10px 20px;
+      background: #b22222;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
 
-  /* Aplicando animaÃ§Ã£o suave nos parÃ¡grafos */
-  .intro-text p {
-    animation: fadeIn 2.5s ease;
-  }
+    .popup-content button:hover {
+      background: #570657;
+    }
 
+    /* RODAPÉ FIXO */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5em;
+      color: #b22222;
+      background: #fff0f5;
+      border-bottom: 10px solid #570657;
+    }
 
-
-  /* POPUP */
-  .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .popup-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .popup-content button {
-            padding: 10px 20px;
-            background: #b22222;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .popup-content button:hover {
-            background: #570657;
-        }
-
-      /* RODAPÃ‰ FIXO */
-      footer {
-        position: fixed;   /* fixa no viewport */
-        bottom: 0;         /* cola no final da tela */
-        left: 0;
-        width: 100%;       /* ocupa toda a largura */
-        text-align: center;
-        padding: 20px;
-        font-family: 'Dancing Script', cursive;
-        font-size: 1.5em;
-        color: #b22222;
-        background: #fff0f5;
-       /* border-top: 0.5px solid #570657; */
-        border-bottom: 10px solid #570657; /* borda na parte de baixo */
+    /* =========================================== */
+    /* AJUSTES PARA CELULAR (até 768px) */
+    /* =========================================== */
+    
+    @media (max-width: 768px) {
+      /* Ajuste do menu para mobile */
+      .menu-fixo ul {
+        gap: 20px;
+        justify-content: center;
       }
+
+      .menu-fixo a {
+        font-size: 28px;
+      }
+
+      /* Ajuste do texto principal para mobile */
+      .intro-text {
+        padding: 15px;
+        margin: 100px 15px 20px 15px;
+        max-width: 90%;
+      }
+
+      .intro-text h1 {
+        font-size: 1.8em;  /* Tamanho menor no mobile */
+        text-align: center;
+      }
+
+      /* AJUSTE DO CARROSSEL PARA MOBILE - CORRIGIDO */
+      .splide {
+        width: 95%;
+        margin: 20px auto;
+        height: auto !important; /* Remove altura fixa */
+      }
+      
+      .splide__slide {
+        height: 500px; /* Altura fixa para o slide no mobile */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff0f5; /* Fundo para caso a imagem seja menor */
+      }
+      
+      .splide__slide img {
+        height: 100%; /* Ocupa 100% da altura do slide */
+        width: auto; /* Largura automática mantém proporção */
+        max-width: 100%; /* Não ultrapassa a largura do container */
+        object-fit: contain; /* Mostra imagem inteira sem cortar */
+        border-radius: 10px;
+      }
+
+      /* Ajuste do rodapé para mobile */
+      footer {
+        font-size: 1.2em;
+        padding: 15px;
+      }
+    }
+
+    /* Para telas muito pequenas (até 480px) */
+    @media (max-width: 480px) {
+      .menu-fixo ul {
+        gap: 10px;
+      }
+
+      .menu-fixo a {
+        font-size: 24px;
+      }
+
+      .intro-text h1 {
+        font-size: 1.6em;  /* Tamanho ainda menor para telas pequenas */
+      }
+
+      .splide__slide {
+        height: 400px;  /* Altura menor para telas pequenas */
+      }
+
+      footer {
+        font-size: 1em;
+        padding: 10px;
+      }
+    }
 
   </style>
 </head>
@@ -229,41 +260,41 @@
   <!-- MENU FIXO -->
   <nav class="menu-fixo">
     <ul>
-        <li><a href="#">💌Jonathan & Audrey </a></li>
+      <li><a href="#">💌Jonathan & Audrey</a></li>
       <li><a href="#"></a></li>
       <li><a href="#"></a></li>
     </ul>
   </nav>
 
-    <!-- TEXTO PRINCIPAL -->
-    <div class="intro-text">
-        <h1>Para mulher mais incrível do mundo, Audrey Estrela💌</h1>
-        <p>
-          Eu sempre quis alguém com sonhos e com vontade de crescer junto comigo. Alguém que topasse construir uma história forte, pra gente se apoiar, viver coisas incríveis e conquistar o
-           mundo lado a lado. Obrigado por ser exatamente essa pessoa e por ser tão incrível na minha vida.  
-        </p>
-        <p>
-          Quando eu menos esperava, no momento em que eu mais estava em paz comigo mesmo, você, que sempre esteve ali por 12 anos, chegou de um jeito diferente. Não mais apenas como uma amizade
-           distante, mas como um amor que, a cada encontro, foi crescendo até transbordar tudo o que já estava cheio dentro de mim. 
-       </p>
-        <p>
-          E não é que aquele amor leve, simples, recíproco, disposto e que faz o coração sorrir… realmente existe? E que sorte a minha por ter encontrado isso em você, uma mulher tão especial.  
-       </p>
-        <p>
-          Eu não sei o que o futuro nos reserva, mas espero que sejam só as melhores coisas desse mundo. Porque, no fim das contas, você caiu no prato do emocionado, 
-          do cara que gosta de se declarar, que faz todas as suas vontades, que te busca e te leva em casa porque quer ter certeza de que você chegou segura. 
-          E eu caí no prato da mulher que merece tudo isso. Da pessoa que, a cada dia, me faz mais feliz e me incentiva a ser um homem melhor.    
-        </p>
-        <p>
-            E é por isso que hoje eu não tenho dúvidas do que eu quero. E, se você também não tiver…
-        </p>
-        <p>
-          Eu gostaria de perguntar se você topa transformar essa amizade tão longa, linda e duradoura no início de um grande amor? Se você, Audrey Santos Estrela Pinheiro, aceita namorar comigo?❤️      
-        </p>
-    </div>
+  <!-- TEXTO PRINCIPAL -->
+  <div class="intro-text">
+    <h1>Para mulher mais incrível do mundo, Audrey Estrela💌</h1>
+    <p>
+      Eu sempre quis alguém com sonhos e com vontade de crescer junto comigo. Alguém que topasse construir uma história forte, pra gente se apoiar, viver coisas incríveis e conquistar o
+      mundo lado a lado. Obrigado por ser exatamente essa pessoa e por ser tão incrível na minha vida.  
+    </p>
+    <p>
+      Quando eu menos esperava, no momento em que eu mais estava em paz comigo mesmo, você, que sempre esteve ali por 12 anos, chegou de um jeito diferente. Não mais apenas como uma amizade
+      distante, mas como um amor que, a cada encontro, foi crescendo até transbordar tudo o que já estava cheio dentro de mim. 
+    </p>
+    <p>
+      E não é que aquele amor leve, simples, recíproco, disposto e que faz o coração sorrir… realmente existe? E que sorte a minha por ter encontrado isso em você, uma mulher tão especial.  
+    </p>
+    <p>
+      Eu não sei o que o futuro nos reserva, mas espero que sejam só as melhores coisas desse mundo. Porque, no fim das contas, você caiu no prato do emocionado, 
+      do cara que gosta de se declarar, que faz todas as suas vontades, que te busca e te leva em casa porque quer ter certeza de que você chegou segura. 
+      E eu caí no prato da mulher que merece tudo isso. Da pessoa que, a cada dia, me faz mais feliz e me incentiva a ser um homem melhor.    
+    </p>
+    <p>
+      E é por isso que hoje eu não tenho dúvidas do que eu quero. E, se você também não tiver…
+    </p>
+    <p>
+      Eu gostaria de perguntar se você topa transformar essa amizade tão longa, linda e duradoura no início de um grande amor? Se você, Audrey Santos Estrela Pinheiro, aceita namorar comigo?❤️      
+    </p>
+  </div>
 
   <!-- CARROSSEL DE IMAGENS -->
-  <div class="splide" aria-label="Carrossel de fotos romÃ¢nticas">
+  <div class="splide" aria-label="Carrossel de fotos românticas">
     <div class="splide__track">
       <ul class="splide__list">
         <li class="splide__slide"><img src="casal1.jpg" alt="Foto 1"></li>
@@ -275,54 +306,62 @@
       </ul>
     </div>
   </div>
-    <br>
-  <br>
-  <br>
- 
   
+  <br>
+  <br>
+  <br>
 
   <footer>
     O começo de uma grande história❤️
   </footer>
 
-      <!-- POPUP -->
-      <div class="popup" id="popup">
-        <div class="popup-content">
-            <img src="play2.png" class="center-img" width="300" height="300" alt="Play">
-            <button id="playButton">Tocar Música</button>
-        </div>
+  <!-- POPUP -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <img src="play2.png" class="center-img" width="300" height="300" alt="Play">
+      <button id="playButton">Tocar Música</button>
     </div>
+  </div>
 
-    <audio id="backgroundMusic" loop>
-        <source src="Luiz_Henrique_e_Leo_-_Mudei_Demais_(mp3.pm).mp3" type="audio/mp3">
-        Seu navegador não suporta o elemento de audio.
-    </audio>
+  <audio id="backgroundMusic" loop>
+    <source src="Luiz_Henrique_e_Leo_-_Mudei_Demais_(mp3.pm).mp3" type="audio/mp3">
+    Seu navegador não suporta o elemento de audio.
+  </audio>
 
-    <script>
-        const popup = document.getElementById('popup');
-        const playButton = document.getElementById('playButton');
-        const backgroundMusic = document.getElementById('backgroundMusic');
+  <script>
+    const popup = document.getElementById('popup');
+    const playButton = document.getElementById('playButton');
+    const backgroundMusic = document.getElementById('backgroundMusic');
 
-        playButton.addEventListener('click', () => {
-            backgroundMusic.play();
-            popup.style.display = 'none'; // Esconde o popup
-        });
-    </script>
+    playButton.addEventListener('click', () => {
+      backgroundMusic.play();
+      popup.style.display = 'none'; // Esconde o popup
+    });
+  </script>
 
   <!-- Splide JS -->
   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide/dist/js/splide.min.js"></script>
   <script>
-    var splide = new Splide( '.splide', {
-      type       : 'loop',
-      perPage    : 3,
-      autoplay   : true,
-      interval   : 3000,
+    var splide = new Splide('.splide', {
+      type: 'loop',
+      perPage: 3,
+      autoplay: true,
+      interval: 3000,
       pauseOnHover: true,
-      cover      : true,
-      height     : '25rem',
-      lazyLoad   : 'nearby',
+      cover: true,
+      height: '25rem',
+      lazyLoad: 'nearby',
       breakpoints: {
-        768: { perPage: 1, height: '10rem' },
+        768: { 
+          perPage: 1, 
+          height: '500px', // Altura fixa para mobile
+          gap: '10px'
+        },
+        480: {
+          perPage: 1,
+          height: '400px', // Altura menor para telas pequenas
+          gap: '5px'
+        }
       },
     });
 
